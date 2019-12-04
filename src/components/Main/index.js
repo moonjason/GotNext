@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+import CourtList from '../CourtList';
+
 const Search = () => {
     const [location, setLocation] = useState('');
+    const [courts, setCourts] = useState([])
 
     // async componentDidMount() {
     //     const movieId = this.props.match.params.id;
@@ -14,6 +17,7 @@ const Search = () => {
             const courts = await fetch(`/api/v1/courts/${location}`);
             const parsedCourts = await courts.json();
             console.log(parsedCourts)
+            setCourts(parsedCourts);
         } catch(err){
             console.log(err);
         }
@@ -28,10 +32,11 @@ const Search = () => {
 
     return (
         <>
-            <div>Search Component</div>
+            <h1>Search Component</h1>
             Location: 
             <input type="text" name="search" onChange={(e) => setLocation(e.target.value)} placeholder="Address, neighboorhood, city, or zip"/>
             <button onClick={() => getCourts(location)}>Get Courts</button>
+            <CourtList courts={courts}/>
         </>
     )
 }

@@ -23,7 +23,8 @@ app.get('/hello', (req, res) => {
 app.get('/api/v1/courts/:location', (req, res) => {
     try {
         client.search({
-            term: 'Basketball Court',
+            // categories: 'basketballcourts',
+            term: 'Basketball Courts',
             location: req.params.location,
           }).then(response => {
             res.json(response.jsonBody.businesses)
