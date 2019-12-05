@@ -20,18 +20,32 @@ app.get('/hello', (req, res) => {
     }
 })
 
+// search list of courts 
 app.get('/api/v1/courts/:location', (req, res) => {
     try {
         client.search({
             // categories: 'basketballcourts',
             term: 'Basketball Courts',
             location: req.params.location,
-          }).then(response => {
+        }).then(response => {
             res.json(response.jsonBody.businesses)
-          }).catch(e => {
+        }).catch(e => {
             console.log(e);
-          });
+        });
     } catch(err){ 
+        console.log(err)
+    }
+})
+
+// court details 
+app.get('/api/v1/courts/show/:court', (req, res) => {
+    try {
+        client.business(req.params.court).then(response => {
+            res.json(response.jsonBody);
+        }).catch(e => {
+            console.log(e);
+        });
+    } catch(err) {
         console.log(err)
     }
 })

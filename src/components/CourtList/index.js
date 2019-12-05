@@ -1,15 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CourtList = ({ courts }) => {
     return (
-        courts.map(court => {
-            return (
-                <div key={court.id}>
-                    <h2>{court.name}</h2>
-                    <img style={{"width": "10%","height": "10%" }} src={court.image_url}/>
-                </div>
-            )
-        })
+        <>
+        {
+            courts.map(court => {
+                return (
+                    <Link key={court.id} to={`main/${court.alias}`}>
+                        <div>
+                            <h2>{court.name}</h2>
+                        </div>
+                    </Link>
+                )
+            })
+        }
+        </>
     )
 }
 

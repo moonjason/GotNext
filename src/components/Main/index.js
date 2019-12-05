@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import CourtList from '../CourtList';
 
 const Search = () => {
@@ -32,7 +31,7 @@ const Search = () => {
 
     return (
         <>
-            <h1>Search Component</h1>
+            <h1>Main Search Component</h1>
             Location: 
             <input type="text" name="search" onChange={(e) => setLocation(e.target.value)} placeholder="Address, neighboorhood, city, or zip"/>
             <button onClick={() => getCourts(location)}>Get Courts</button>
