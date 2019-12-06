@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
 import ReactMapGL, { Marker } from 'react-map-gl';
-import { Pin } from './style';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import { 
+    Pin,
+    CourtContainer
+ } from './style';
 
 
 const CourtShow = (props) => {
@@ -28,9 +34,10 @@ const CourtShow = (props) => {
             {  
                 court
                     ?
-                        <>
-                            <h1>{court.name}</h1>
-                            <img style={{"maxWidth": "22rem", "maxHeight": "22rem"}} src={court.image_url} alt=""/>
+                    <>
+                        <h1>{court.name}</h1>   
+                        <CourtContainer>
+                            <img src={court.photos[1]} alt=""/>
                             <ReactMapGL 
                                 {...viewport} 
                                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -48,7 +55,8 @@ const CourtShow = (props) => {
                                     <Pin src="/images/pin.png" alt="map marker"/>
                                 </Marker>
                             </ReactMapGL>
-                        </>
+                        </CourtContainer>
+                    </>
                     : 
                         <div>...loading</div>
             }
