@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker } from 'react-map-gl';
+import { Pin } from './style';
 
 
 const CourtShow = (props) => {
@@ -7,7 +8,7 @@ const CourtShow = (props) => {
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
-        zoom: 14,
+        zoom: 15,
     });
 
     useEffect(() => {
@@ -20,32 +21,36 @@ const CourtShow = (props) => {
         getCourt()
     }, []);
 
+
+    console.log(court)
     return (    
         <> 
-            {console.log(court)}
             {  
                 court
-                ?
-                <>
-            <h1>{court.name}</h1>
-            <img style={{"maxWidth": "22rem", "maxHeight": "22rem"}} src={court.image_url} alt=""/>
-            <ReactMapGL 
-                {...viewport} 
-                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                mapStyle="mapbox://styles/moonjason/ck3sd120z0xnq1cpu84vv7ki4" 
-                onViewportChange={viewport => {
-                    setViewport(viewport);
-                }}
-            >
-                <Marker
-                    latitude={court.coordinates.latitude}
-                    longitude={court.coordinates.longitude}
-                >
-                    <div>Hi</div>
-                </Marker>
-            </ReactMapGL>
-                </>
-                : <div>...loading</div>
+                    ?
+                        <>
+                            <h1>{court.name}</h1>
+                            <img style={{"maxWidth": "22rem", "maxHeight": "22rem"}} src={court.image_url} alt=""/>
+                            <ReactMapGL 
+                                {...viewport} 
+                                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                                mapStyle="mapbox://styles/moonjason/ck3sd120z0xnq1cpu84vv7ki4" 
+                                onViewportChange={viewport => {
+                                    setViewport(viewport);
+                                }}
+                            >
+                                <Marker
+                                    latitude={court.coordinates.latitude}
+                                    longitude={court.coordinates.longitude}
+                                    offsetLeft={-25}
+                                    offsetTop={-50}
+                                >
+                                    <Pin src="/images/pin.png" alt="map marker"/>
+                                </Marker>
+                            </ReactMapGL>
+                        </>
+                    : 
+                        <div>...loading</div>
             }
         </>
     )
