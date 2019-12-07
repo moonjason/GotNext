@@ -1,5 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/firebase-firestore'
+import 'firebase/storage'
 import "firebase/auth"
 
 const config = {
@@ -18,12 +19,14 @@ class Firebase {
     app.initializeApp(config)
     this.db = app.firestore()
     this.auth = app.auth()
+    this.storage = app.storage()
   }
 
-  doCreateUser = (email, displayName, password) => {
-    return this.auth.createUserWithEmailAndPassword(email, displayName, password)
+  doCreateUser = (email, password) => {
+    return this.auth.createUserWithEmailAndPassword(email, password)
   }
 
   findUser = uid => this.db.doc(`users/${uid}`);
 }
+
 export default Firebase;

@@ -16,17 +16,17 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState();
   
   return (
+    <div className="App">
       <Router>
-        <div className="App">
           <Switch>
             <Route exact path={'/'} render={() => <h1>Landing Page</h1>}/>
             <Route exact path={'/login'} render={() => <Login />}/>
-            <Route exact path={'/register'} render={() => <Register />}/>
+            <Route exact path={'/register'} render={routeProps => <Register {...routeProps}/>}/>
             <Route exact path={'/main'} component={Main}/>
             <Route exact path={'/main/:court'} component={CourtShow}/>
           </Switch>
-        </div>
       </Router>
+    </div>
   );
 }
 
