@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CourtList from '../CourtList';
 
-const Search = () => {
+const Main = () => {
     const [location, setLocation] = useState('');
     const [courts, setCourts] = useState([]);
 
@@ -27,4 +27,4 @@ const Search = () => {
     )
 }
  
-export default Search;
+export default Main;

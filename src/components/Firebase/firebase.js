@@ -26,6 +26,10 @@ class Firebase {
     return this.auth.createUserWithEmailAndPassword(email, password)
   }
 
+  doSignOut = () => {
+    return this.auth.signOut()
+  }
+
   findUser = uid => this.db.doc(`users/${uid}`);
 }
 

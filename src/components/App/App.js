@@ -1,19 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   BrowserRouter as Router,
   Route, 
   Switch, 
 } from 'react-router-dom';
+import { withFirebase } from '../Firebase';
 
 import CourtShow from '../CourtShow';
 import Main from '../Main';
 import Login from '../Login';
 import Register from '../Register';
+
 import '../../App.css';
 
+const App = ({ firebase }) => {
+  const [currentUser, setCurrentUser] = useState(null);
 
-const App = () => {
-  const [currentUser, setCurrentUser] = useState();
+  useEffect(() => {
+    const findAuth = () => {
+      firebase.auth.onAuthStateChanged(async authUser => {
+        console.log(authUser)
+        if (authUser) {
+          const getDisplayName = await firebase.db.collection('users').doc(authUser.uid).get()
+            .then(doc => {
+              if (doc.exists){
+                return doc.data().displayName
+              }
+            }).catch(err => {
+              console.log(err)
+            })
+          console.log(getDisplayName)
+          setCurrentUser({
+            email: authUser.email,
+            userId: authUser.uid,
+            displayName: getDisplayName
+          })
+        } else{
+          setCurrentUser(null)
+        } 
+      })
+    };
+    findAuth();
+  }, [])
   
   return (
     <div className="App">
@@ -30,4 +58,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default withFirebase(App);
