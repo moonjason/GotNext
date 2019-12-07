@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import ReactMapGL, { Marker } from 'react-map-gl';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { 
     Pin,
@@ -37,7 +36,6 @@ const CourtShow = (props) => {
                     <>
                         <h1>{court.name}</h1>   
                         <CourtContainer>
-                            <img src={court.photos[1]} alt=""/>
                             <ReactMapGL 
                                 {...viewport} 
                                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
