@@ -20,8 +20,8 @@ class Firebase {
     this.auth = app.auth()
   }
 
-  doCreateUser = (email, password) => {
-    return this.auth.createUserWithEmailAndPassword(email, password)
+  doCreateUser = (email, displayName, password) => {
+    return this.auth.createUserWithEmailAndPassword(email, displayName, password)
   }
 
   findUser = uid => this.db.doc(`users/${uid}`);
