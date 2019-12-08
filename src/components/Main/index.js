@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import CourtList from '../CourtList';
+import NavBar from '../NavBar';
 
-const Main = () => {
+const Main = ({ currentUser }) => {
     const [location, setLocation] = useState('');
     const [courts, setCourts] = useState([]);
 
@@ -18,6 +19,7 @@ const Main = () => {
 
     return (
         <>
+            <NavBar currentUser={currentUser}/>
             <h1>Main Search Component</h1>
             Location: 
             <input type="text" name="search" onChange={(e) => setLocation(e.target.value)} placeholder="Address, neighboorhood, city, or zip"/>
