@@ -26,7 +26,7 @@ export const NavBtn = styled.div`
 `
 
 export const LinksContainer = styled.div`
-  display: inline;
+  display: flex;
   font-size: 18px;
   float: right;
   margin-top: 1.5px;
@@ -41,7 +41,7 @@ export const Link = styled(NavLink)`
     border-radius: 50px;
     &:hover{
         color: #0D98BA;
-        background-color: rgba(0, 0, 0, 0.3); 
+        background-color: rgba(255, 255, 255, 0.5); 
     }
     &.active{
         color: #0D98BA;

@@ -12,8 +12,6 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
-console.log(config)
-
 class Firebase {
   constructor() {
     app.initializeApp(config)
@@ -22,13 +20,14 @@ class Firebase {
     this.storage = app.storage()
   }
 
-  doCreateUser = (email, password) => {
-    return this.auth.createUserWithEmailAndPassword(email, password)
-  }
+  doCreateUser = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
+  
 
-  doSignOut = () => {
-    return this.auth.signOut()
-  }
+  doSignIn = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
+  
+
+  doSignOut = () => this.auth.signOut();
+  
 
   findUser = uid => this.db.doc(`users/${uid}`);
 }

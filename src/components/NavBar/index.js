@@ -28,6 +28,7 @@ const NavBar = ({ currentUser, firebase }) => {
                 currentUser
                     ?
                         <LinksContainer>
+                            <Link exact to="/">{currentUser.displayName}</Link>
                             <Link exact to="/main" >Search</Link>
                             <Link exact to="/" >Check-Ins</Link>
                             <Link exact to="/" >Profile</Link>

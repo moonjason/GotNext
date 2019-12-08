@@ -48,7 +48,7 @@ const App = ({ firebase }) => {
       <Router>
           <Switch>
             <Route exact path={'/'} render={() => <h1>Landing Page</h1>}/>
-            <Route exact path={'/login'} render={() => <Login />}/>
+            <Route exact path={'/login'} render={routeProps => <Login {...routeProps}/>}/>
             <Route exact path={'/register'} render={routeProps => <Register {...routeProps}/>}/>
             <Route exact path={'/main'} render={() => <Main currentUser={currentUser}/>}/>
             <Route exact path={'/main/:court'} component={CourtShow}/>

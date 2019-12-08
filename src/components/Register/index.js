@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
 
-const Register = (props) => {
+const Register = ({ firebase, history }) => {
     const [userForm, setUserForm] = useState({
         email: '',
         displayName: '',
@@ -20,12 +20,12 @@ const Register = (props) => {
     const onSubmit = e => {
         e.preventDefault()
         const { email, displayName, password } = userForm
-        props.firebase.doCreateUser(email, password)
+        firebase.doCreateUser(email, password)
             .then(authUser => {
-                props.firebase.db.collection('users').doc(authUser.user.uid).set({email, displayName})
+                firebase.db.collection('users').doc(authUser.user.uid).set({email, displayName})
                     .then(docRef => console.log(docRef))
                     .catch(err => console.log(err))
-                props.history.push('/main')
+                history.push('/main')
             })
             .catch(error => {
                 setError({ error })
