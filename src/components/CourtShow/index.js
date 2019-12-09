@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 
-import NavBar from '../NavBar';
-
 import { 
     Pin,
     CourtContainer

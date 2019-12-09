@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import CourtList from '../CourtList';
-import NavBar from '../NavBar';
 
 const Main = () => {
     const [location, setLocation] = useState('');
