@@ -9,7 +9,7 @@ const ProfileShow = ({ currentUser }) => {
                 ?
                     <>
                         <h1>Profile Show Page</h1>
-                        <img style={{'maxWidth': '10vw'}} src={currentUser.imgUrl} alt="profile picture"/>
+                        <img style={{'maxWidth': '10vw'}} src={currentUser.imgUrl} alt="profile"/>
                         <h2>{currentUser.displayName}</h2>
                         <p>Location: </p> <p>{currentUser.location}</p>
                         <p>Bio: </p> <p>{currentUser.bio}</p>

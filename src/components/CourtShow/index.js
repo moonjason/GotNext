@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
-
 import { 
     Pin,
-    CourtContainer
+    CourtContainer,
  } from './style';
 
 
@@ -28,6 +27,7 @@ const CourtShow = ({ match }) => {
     const onClick = () => {
         console.log('popping up modal')
     }
+
     console.log(court)
     return (    
         <> 
@@ -55,7 +55,6 @@ const CourtShow = ({ match }) => {
                                 </Marker>
                             </ReactMapGL>
                         </CourtContainer>
-                        <button onClick={() => onClick()}>Start A Game</button>
                     </>
                     : 
                         <div>...loading</div>
