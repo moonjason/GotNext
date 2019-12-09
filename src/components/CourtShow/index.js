@@ -25,7 +25,9 @@ const CourtShow = ({ match }) => {
         getCourt()
     }, []);
 
-
+    const onClick = () => {
+        console.log('popping up modal')
+    }
     console.log(court)
     return (    
         <> 
@@ -53,6 +55,7 @@ const CourtShow = ({ match }) => {
                                 </Marker>
                             </ReactMapGL>
                         </CourtContainer>
+                        <button onClick={() => onClick()}>Start A Game</button>
                     </>
                     : 
                         <div>...loading</div>

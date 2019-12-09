@@ -55,6 +55,7 @@ const EditProfile = ({ firebase, history, currentUser }) => {
             favoriteSports: [sportOne, sportTwo, sportThree],
             socials: [socialOne, socialTwo,socialThree]
         }
+        console.log(user)
         firebase.db.collection('users').doc(currentUser.userId).set(user, {merge: true})
             .then(() => {
                 history.push('/main')
