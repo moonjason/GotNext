@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
 
-const EditProfile = ({ firebase }) => {
+const EditProfile = ({ firebase, history, currentUser }) => {
     const [profileForm, setProfile] = useState({
         imgUrl: '',
         location: '',
         bio: '',
     })
-    const [error, setError] = useState(null)
     const [favSports, setFavSports] = useState({
         sportOne: '',
         sportTwo: '',
         sportThree: ''
     })
-    const [socialUrls, setSocialUrls] = useState([])
-            // do same thing as setFavsports everywhere
-
+    const [socialUrls, setSocialUrls] = useState({
+        socialOne: '',
+        socialTwo: '',
+        socialThree: ''
+    })
 
     const addProfilePic = e => {
         firebase.doAddFile(e.target.files[0])
@@ -34,8 +35,11 @@ const EditProfile = ({ firebase }) => {
                 ...favSports,
                 [e.target.name]: e.target.value
             })
-        } else if (e.target.name === 'socialUrls'){
-            // do same thing as setFavsports everywhere
+        } else if (e.target.name === 'socialOne' || e.target.name === 'socialTwo' || e.target.name === 'socialThree'){
+            setSocialUrls({
+                ...socialUrls,
+                [e.target.name]: e.target.value
+            })
         } else {
             setProfile({
                 ...profileForm,
@@ -44,20 +48,29 @@ const EditProfile = ({ firebase }) => {
         }
     }
 
-    const onSubmit = () => {
-        console.log('submitting!!!')
-        //find userid in firestore
-        //add these new properties to that user
+    const onSubmit = e => {
+        e.preventDefault()
+        const user = {
+            ...profileForm,
+            favoriteSports: [sportOne, sportTwo, sportThree],
+            socials: [socialOne, socialTwo,socialThree]
+        }
+        firebase.db.collection('users').doc(currentUser.userId).set(user, {merge: true})
+            .then(() => {
+                history.push('/main')
+            })
+            .catch(err => console.log(err))
     }
 
 
     const { imgUrl, location, bio } = profileForm;
     const { sportOne, sportTwo, sportThree } = favSports;
+    const { socialOne, socialTwo, socialThree } = socialUrls;
     const isInvalid = false; 
     return (
         <>
             <h1>Edit Your Profile</h1>
-            <form onSubmit={() => onSubmit()}>
+            <form onSubmit={e => onSubmit(e)}>
                 Profile Picture:
                 <input type="file" onChange={e => addProfilePic(e)} accept='image/*'/>
                 <img src={imgUrl} alt=""/>
@@ -81,22 +94,21 @@ const EditProfile = ({ firebase }) => {
                 }
                 
                 Social Links:
-                <input type='text' name='socialUrls' value={socialUrls[0]} placeholder="Social Link" onChange={e => onChange(e)}/>
+                <input type='text' name='socialOne' value={socialOne} placeholder="Social Link" onChange={e => onChange(e)}/>
                 {
-                    socialUrls.length > 0
+                    socialOne !== ''
                     ? 
-                    <input type='text' name='socialUrls' value={socialUrls[1]} placeholder="2nd Social Link" onChange={e => onChange(e)}/>
+                    <input type='text' name='socialTwo' value={socialTwo} placeholder="2nd Social Link" onChange={e => onChange(e)}/>
                     : ''
                 }
                 {
-                    socialUrls.length > 1
+                    socialTwo !== ''
                     ? 
-                    <input type='text' name='socialUrls' value={socialUrls[2]} placeholder="3rd Social Link" onChange={e => onChange(e)}/>
+                    <input type='text' name='socialThree' value={socialThree} placeholder="3rd Social Link" onChange={e => onChange(e)}/>
                     : ''
                 }
 
-                <input type='submit' value='submit' disabled={isInvalid}/>
-                {error ? <p>{error}</p> : ''}
+                <input type='submit' value='Submit' disabled={isInvalid}/>
             </form>
         </>
     )

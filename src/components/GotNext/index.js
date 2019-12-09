@@ -12,7 +12,7 @@ const GotNext = ({ currentUser }) => {
             <NavBar currentUser={currentUser}/>
             <Switch>
                 <Route exact path={'/main'} render={() => <Main/>}/>
-                <Route exact path={'/main/profile/edit'} render={() => <EditProfile currentUser={currentUser}/>}/>
+                <Route exact path={'/main/profile/edit'} render={routeProps => <EditProfile currentUser={currentUser} {...routeProps}/>}/>
                 <Route exact path={'/main/:court'} render={routeProps => <CourtShow currentUser={currentUser} {...routeProps}/>}/>
             </Switch>
         </div>
