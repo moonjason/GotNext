@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CourtList from '../CourtList';
 import NavBar from '../NavBar';
 
-const Main = ({ currentUser }) => {
+const Main = () => {
     const [location, setLocation] = useState('');
     const [courts, setCourts] = useState([]);
 
@@ -19,20 +19,11 @@ const Main = ({ currentUser }) => {
 
     return (
         <>
-            {
-                currentUser || currentUser === null
-                     ?
-                        <>
-                            <NavBar currentUser={currentUser}/>
-                            <h1>Main Search Component</h1>
-                            Location: 
-                            <input type="text" name="search" onChange={(e) => setLocation(e.target.value)} placeholder="Address, neighboorhood, city, or zip"/>
-                            <button onClick={() => getCourts(location)}>Get Courts</button>
-                            <CourtList courts={courts}/>
-                        </>
-                    :   
-                        <div>...loading</div>
-            }
+            <h1>Main Search Component</h1>
+            Location: 
+            <input type="text" name="search" onChange={(e) => setLocation(e.target.value)} placeholder="Address, neighboorhood, city, or zip"/>
+            <button onClick={() => getCourts(location)}>Get Courts</button>
+            <CourtList courts={courts}/>
         </>
     )
 }

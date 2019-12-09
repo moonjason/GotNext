@@ -29,7 +29,7 @@ const NavBar = ({ currentUser, firebase }) => {
                     ?
                         <LinksContainer>
                             <Link exact to="/">{currentUser.displayName}</Link>
-                            <Link exact to="/main" >Search</Link>
+                            <Link exact to="/main" >Home</Link>
                             <Link exact to="/" >Check-Ins</Link>
                             <Link exact to="/" >Profile</Link>
                             <Link exact to="/" onClick={() => firebase.doSignOut()} >Sign Out</Link>

@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 
+import NavBar from '../NavBar';
 import CourtShow from '../CourtShow';
 import Main from '../Main';
 import Login from '../Login';
@@ -46,12 +47,13 @@ const App = ({ firebase }) => {
   return (
     <div className="App">
       <Router>
+          <NavBar currentUser={currentUser}/> 
           <Switch>
             <Route exact path={'/'} render={() => <h1>Landing Page</h1>}/>
             <Route exact path={'/login'} render={routeProps => <Login {...routeProps}/>}/>
             <Route exact path={'/register'} render={routeProps => <Register {...routeProps}/>}/>
             <Route exact path={'/main'} render={() => <Main currentUser={currentUser}/>}/>
-            <Route exact path={'/main/:court'} component={CourtShow}/>
+            <Route exact path={'/main/:court'} render={routeProps => <CourtShow currentUser={currentUser} {...routeProps}/>}/>
           </Switch>
       </Router>
     </div>

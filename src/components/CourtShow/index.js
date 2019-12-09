@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
 import ReactMapGL, { Marker } from 'react-map-gl';
+
+import NavBar from '../NavBar';
 
 import { 
     Pin,
@@ -8,17 +9,17 @@ import {
  } from './style';
 
 
-const CourtShow = (props) => {
+const CourtShow = ({ match }) => {
     const [court, setCourt] = useState(null);
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
-        zoom: 15,
+        zoom: 16,
     });
 
     useEffect(() => {
         const getCourt = async () => {
-            const court = await fetch(`/api/v1/courts/show/${props.match.params.court}`);
+            const court = await fetch(`/api/v1/courts/show/${match.params.court}`);
             const parsedCourt = await court.json();
             setViewport({latitude: parsedCourt.coordinates.latitude, longitude: parsedCourt.coordinates.longitude, ...viewport})
             setCourt(parsedCourt);
