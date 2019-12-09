@@ -19,15 +19,18 @@ class Firebase {
     this.auth = app.auth()
     this.storage = app.storage()
   }
+  
+  doAddFile = file => {
+    return this.storage.ref()
+        .child(file.name)
+        .put(file)
+  }
 
   doCreateUser = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
   
-
   doSignIn = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
   
-
   doSignOut = () => this.auth.signOut();
-  
 
   findUser = uid => this.db.doc(`users/${uid}`);
 }
