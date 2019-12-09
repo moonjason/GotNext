@@ -19,19 +19,19 @@ const App = ({ firebase }) => {
       firebase.auth.onAuthStateChanged(async authUser => {
         console.log(authUser)
         if (authUser) {
-          const getDisplayName = await firebase.db.collection('users').doc(authUser.uid).get()
+          const getUserData = await firebase.db.collection('users').doc(authUser.uid).get()
             .then(doc => {
               if (doc.exists){
-                return doc.data().displayName
+                return doc.data()
               }
             }).catch(err => {
               console.log(err)
             })
-          console.log(getDisplayName)
+          console.log(getUserData)
           setCurrentUser({
             email: authUser.email,
             userId: authUser.uid,
-            displayName: getDisplayName
+            ...getUserData
           })
         } else{
           setCurrentUser(null)
