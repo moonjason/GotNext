@@ -46,7 +46,7 @@ const App = ({ firebase }) => {
       <Router>
           <Switch>
             <Route path={'/main'} render={() => <GotNext currentUser={currentUser}/>}/>
-            <Route path={"/"} component={Intro}/>
+            <Route path={"/"} render={routeProps => <Intro {...routeProps}/>}/>
           </Switch>
       </Router>
     </div>

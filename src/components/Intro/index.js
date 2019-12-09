@@ -5,7 +5,11 @@ import LandingPage from '../LandingPage';
 import Login from '../Login';
 import Register from '../Register';
 
-const Intro = () => {
+const Intro = ({ currentUser, history }) => {
+    if(currentUser) {
+        history.push('/main')
+    }
+
     return (
         <div>
             <Switch>
