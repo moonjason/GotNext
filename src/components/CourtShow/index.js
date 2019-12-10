@@ -21,6 +21,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
         sport: 'Basketball',
         message: ''
     })
+    const [checkedInPlayers, setCheckedInPlayers] = useState();
 
     useEffect(() => {
         const getCourt = async () => {
@@ -28,9 +29,24 @@ const CourtShow = ({ firebase, currentUser, match }) => {
             const parsedCourt = await court.json();
             setViewport({latitude: parsedCourt.coordinates.latitude, longitude: parsedCourt.coordinates.longitude, ...viewport})
             setCourt(parsedCourt);
+            firebase.db.collection('courts').doc(parsedCourt.id).get()
+                .then(doc => {
+                    if (doc.exists) {
+                        setCheckedInPlayers([...doc.data().Basketball])
+                    }
+                }).catch(err => console.log(err))
+            firebase.db.collection('courts').doc(parsedCourt.id).onSnapshot(snapshot => setCheckedInPlayers([...snapshot.data().Basketball]))
         }
         getCourt();
     }, []);
+
+//     firebase.db.collection('users').doc(authUser.uid).get()
+//     .then(doc => {
+//         setCurrentUser({...doc.data()})
+//     }).catch(err => {
+//       console.log(err)
+//     })
+//   firebase.db.collection('users').doc(authUser.uid).onSnapshot(snapshot => setCurrentUser({...snapshot.data()}))
 
     const onClick = () => {
         setModal(!modal);
@@ -41,6 +57,13 @@ const CourtShow = ({ firebase, currentUser, match }) => {
             ...checkInForm,
             [e.target.name]: e.target.value
         })
+    }
+
+    const removePlayerFromCourt = () => {
+        firebase.db.collection('courts').doc(court.id)
+        .update({
+            "Basketball.playerId": firebase.FieldValue.arrayRemove("FjTKfKf0kKaYPisSorn5CT8vSJl1")
+        }).catch(err => console.log(err))
     }
 
     const onSubmit = e => {
@@ -72,10 +95,11 @@ const CourtShow = ({ firebase, currentUser, match }) => {
     }
 
     console.log(court)
+    console.log(checkedInPlayers, 'checked inplayers <----')
     return (    
         <> 
             {  
-                court
+                court && checkedInPlayers
                     ?
                     <>
                         <h1>{court.name}</h1>   
@@ -98,11 +122,32 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 </Marker>
                             </ReactMapGL>
                         </CourtContainer>
+
                         {
                             currentUser
-                                ?   <button onClick={() => onClick()}>Check In</button>
-                                :   ''
+                                ?   
+                                    <button onClick={() => onClick()}>Check In</button>
+                                :   
+                                    null
                         }
+
+                        <button onClick={() => removePlayerFromCourt()}>Remove</button>
+                        <h4>Basketball</h4>
+                        <h5>Player:</h5>
+                        <h5>Messages:</h5>
+                        <ul>
+                            {
+                                checkedInPlayers.map((player, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <p>{player.playerName}</p>
+                                            <p>{player.message}</p>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+
                         <ModalWindow showModal={modal}>
                             <div>
                                 <form onSubmit={e => onSubmit(e)}>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@google-cloud/firestore": "^2.6.1",
     "express": "^4.17.1",
     "firebase": "^7.5.2",
     "react": "^16.12.0",

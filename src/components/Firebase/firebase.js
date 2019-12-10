@@ -18,6 +18,7 @@ class Firebase {
     this.db = app.firestore()
     this.auth = app.auth()
     this.storage = app.storage()
+    this.FieldValue = app.firestore.FieldValue
   }
   
   doAddFile = file => {
