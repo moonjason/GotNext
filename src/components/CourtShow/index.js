@@ -7,14 +7,20 @@ import {
     ModalClose
  } from './style';
 
-const CourtShow = ({ match }) => {
+ import { withFirebase } from '../Firebase';
+
+const CourtShow = ({ firebase, currentUser, match }) => {
     const [court, setCourt] = useState(null);
     const [viewport, setViewport] = useState({
         width: 400,
         height: 400,
         zoom: 16,
     });
-    const [modal, setModal] = useState(false)
+    const [modal, setModal] = useState(false);
+    const [checkInForm, setCheckInForm] = useState({
+        sport: 'Basketball',
+        message: ''
+    })
 
     useEffect(() => {
         const getCourt = async () => {
@@ -23,16 +29,46 @@ const CourtShow = ({ match }) => {
             setViewport({latitude: parsedCourt.coordinates.latitude, longitude: parsedCourt.coordinates.longitude, ...viewport})
             setCourt(parsedCourt);
         }
-        getCourt()
+        getCourt();
     }, []);
 
     const onClick = () => {
         setModal(!modal);
     }
+ 
+    const onChange = e => {
+        setCheckInForm({
+            ...checkInForm,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const onSubmit = e => {
+        console.log(checkInForm.sport)
         e.preventDefault();
-        console.log('submitting form');
+        firebase.db.collection('courts').doc(court.id).get()
+            .then(doc => {
+                if (doc.exists){
+                    firebase.db.collection('courts').doc(court.id).update({
+                        [checkInForm.sport]: [...doc.data()[checkInForm.sport], { playerId: currentUser.userId, playerName: currentUser.displayName, message: checkInForm.message} ]
+                    }).then(() => {
+                        setModal(false);
+                    }).catch(err => console.log(err))
+                } else {
+                    firebase.db.collection('courts').doc(court.id).set({
+                        courtName: court.name,
+                        [checkInForm.sport]: [{ playerId: currentUser.userId, playerName: currentUser.displayName, message: checkInForm.message}]
+                    }).then(() => {
+                        firebase.db.collection('users').doc(currentUser.userId).update({
+                            isCheckedIn: true,
+                            currentCheckIn: court.id
+                        })
+                        setModal(false);
+                    }).catch(err => console.log(err))
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
     }
 
     console.log(court)
@@ -62,20 +98,24 @@ const CourtShow = ({ match }) => {
                                 </Marker>
                             </ReactMapGL>
                         </CourtContainer>
-                        <button onClick={() => onClick()}>Start a Game</button>
+                        {
+                            currentUser
+                                ?   <button onClick={() => onClick()}>Check In</button>
+                                :   ''
+                        }
                         <ModalWindow showModal={modal}>
                             <div>
                                 <form onSubmit={e => onSubmit(e)}>
                                     <ModalClose title="Close" onClick={() => onClick()}>Close</ModalClose>
                                     <h3>Select a sport</h3>
-                                    <select name="sport">
+                                    <select name="sport" onChange={e => onChange(e)}>
                                         <option value="Basketball">Basketball</option>
                                         <option value="Football">Football</option>
                                     </select>
                                     <br/>
                                     <br/>
                                     <h3>Write a message</h3>
-                                    <input type="text" />
+                                    <input type="text" name="message" value={checkInForm.message} onChange={e => onChange(e)}/>
                                     <br/>
                                     <br/>
                                     <button type="submit">Check-In</button>
@@ -90,4 +130,4 @@ const CourtShow = ({ match }) => {
     )
 }
 
-export default CourtShow;
+export default withFirebase(CourtShow);

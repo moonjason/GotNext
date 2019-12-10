@@ -16,31 +16,24 @@ const App = ({ firebase }) => {
 
   useEffect(() => {
     const findAuth = () => {
-      firebase.auth.onAuthStateChanged(async authUser => {
+      firebase.auth.onAuthStateChanged(authUser => {
         console.log(authUser)
         if (authUser) {
-          const getUserData = await firebase.db.collection('users').doc(authUser.uid).get()
+          firebase.db.collection('users').doc(authUser.uid).get()
             .then(doc => {
-              if (doc.exists){
-                return doc.data()
-              }
+                setCurrentUser({...doc.data()})
             }).catch(err => {
               console.log(err)
             })
-          console.log(getUserData)
-          setCurrentUser({
-            email: authUser.email,
-            userId: authUser.uid,
-            ...getUserData
-          })
+          firebase.db.collection('users').doc(authUser.uid).onSnapshot(snapshot => setCurrentUser({...snapshot.data()}))
         } else{
           setCurrentUser(null)
         } 
       })
-    };
+    };  
     findAuth();
   }, [])
-  
+
   return (
     <div className="App">
       <Router>

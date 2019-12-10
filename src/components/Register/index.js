@@ -22,7 +22,7 @@ const Register = ({ firebase, history }) => {
         const { email, displayName, password } = userForm
         firebase.doCreateUser(email, password)
             .then(authUser => {
-                firebase.db.collection('users').doc(authUser.user.uid).set({email, displayName})
+                firebase.db.collection('users').doc(authUser.user.uid).set({email, displayName, isCheckedIn: false, currentCheckIn: '', userId: authUser.user.uid})
                     .then(docRef => console.log(docRef))
                     .catch(err => console.log(err))
                 history.push('/main/profile/edit')

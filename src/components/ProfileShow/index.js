@@ -29,7 +29,7 @@ const ProfileShow = ({ currentUser }) => {
                                 })
                             }
                         </ul>
-                        <Link exact to={'/main/profile/edit'}>Edit Profile</Link>
+                        <Link to={'/main/profile/edit'}>Edit Profile</Link>
                     </>
                 : <div>...loading</div>
         }
