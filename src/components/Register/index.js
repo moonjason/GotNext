@@ -25,7 +25,7 @@ const Register = ({ firebase, history }) => {
                 firebase.db.collection('users').doc(authUser.user.uid).set({email, displayName})
                     .then(docRef => console.log(docRef))
                     .catch(err => console.log(err))
-                history.push('/main')
+                history.push('/main/profile/edit')
             })
             .catch(error => {
                 setError({ error })

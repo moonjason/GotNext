@@ -3,8 +3,9 @@ import ReactMapGL, { Marker } from 'react-map-gl';
 import { 
     Pin,
     CourtContainer,
+    ModalWindow,
+    ModalClose
  } from './style';
-
 
 const CourtShow = ({ match }) => {
     const [court, setCourt] = useState(null);
@@ -13,6 +14,7 @@ const CourtShow = ({ match }) => {
         height: 400,
         zoom: 16,
     });
+    const [modal, setModal] = useState(false)
 
     useEffect(() => {
         const getCourt = async () => {
@@ -25,7 +27,12 @@ const CourtShow = ({ match }) => {
     }, []);
 
     const onClick = () => {
-        console.log('popping up modal')
+        setModal(!modal);
+    }
+
+    const onSubmit = e => {
+        e.preventDefault();
+        console.log('submitting form');
     }
 
     console.log(court)
@@ -55,6 +62,26 @@ const CourtShow = ({ match }) => {
                                 </Marker>
                             </ReactMapGL>
                         </CourtContainer>
+                        <button onClick={() => onClick()}>Start a Game</button>
+                        <ModalWindow showModal={modal}>
+                            <div>
+                                <form onSubmit={e => onSubmit(e)}>
+                                    <ModalClose title="Close" onClick={() => onClick()}>Close</ModalClose>
+                                    <h3>Select a sport</h3>
+                                    <select name="sport">
+                                        <option value="Basketball">Basketball</option>
+                                        <option value="Football">Football</option>
+                                    </select>
+                                    <br/>
+                                    <br/>
+                                    <h3>Write a message</h3>
+                                    <input type="text" />
+                                    <br/>
+                                    <br/>
+                                    <button type="submit">Check-In</button>
+                                </form>
+                            </div>
+                        </ModalWindow>
                     </>
                     : 
                         <div>...loading</div>
