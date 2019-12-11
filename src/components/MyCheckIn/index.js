@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withFirebase } from '../Firebase';
+import { Link } from 'react-router-dom';
 
 const MyCheckIn = ({ currentUser, firebase }) => {
     const [checkedInPlayers, setCheckedInPlayers] = useState(null)
@@ -20,12 +21,9 @@ const MyCheckIn = ({ currentUser, firebase }) => {
         }
     }, [currentUser])
     
-    // console.log(checkedInPlayers)
-    return (
-        <>
-        {  
-            checkedInPlayers && courtName
-                ? 
+    const renderContent = () => {
+        if(currentUser.currentCheckIn !== ''){
+            return (
                     <div>
                         <h1>Currently checked in at: </h1>
                         <h1>{courtName}</h1>
@@ -37,7 +35,7 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                                 checkedInPlayers.map((player, i) => {
                                     return (
                                         <li key={i}>
-                                            <p>{player.playerName}</p>
+                                            <Link to={`/main/profile/${player.playerId}`}><p>{player.playerName}</p></Link>
                                             <p>{player.message}</p>
                                         </li>
                                     )
@@ -45,8 +43,53 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                             }
                         </ul>
                     </div>
+            )
+        } else {
+            return(
+                <div>
+                    <h1>You are currently not checked in anywhere!</h1>
+                    <h3>Click here to look for parks</h3>
+                </div>
+            )
+        }
+    }
+    // console.log(checkedInPlayers)
+    return (
+        <>
+        {  
+            checkedInPlayers && courtName
+                ? 
+
+                    <div>
+                            {renderContent()}
+                            {/* currentUser.currentCheckIn !== '' */}
+                            
+                            {/* <h1>Currently checked in at: </h1>
+                            <h1>{courtName}</h1>
+                            <h4>Basketball</h4>
+                            <h5>Players:</h5>
+                            <h5>Messages:</h5>
+                            <ul>
+                                {
+                                    checkedInPlayers.map((player, i) => {
+                                        return (
+                                            <li key={i}>
+                                                <Link to={`/main/profile/${player.playerId}`}><p>{player.playerName}</p></Link>
+                                                <p>{player.message}</p>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        
+                            <div>
+                                <h1>You are currently not checked in anywhere!</h1>
+                                <h3>Click here to look for parks</h3>
+                            </div> */}
+
+                    </div>
                 :
-                    <div>Loading</div>
+                    <div>...Loading</div>
         }
         </>
     )

@@ -7,6 +7,7 @@ import {
     ModalClose
  } from './style';
 
+ import { Link } from 'react-router-dom';
  import { withFirebase } from '../Firebase';
 
 const CourtShow = ({ firebase, currentUser, match }) => {
@@ -33,9 +34,6 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                 .then(doc => {
                     if (doc.exists) {
                         setCheckedInPlayers([...doc.data().Basketball])
-                    }
-                }).then(doc => {
-                    if (doc){
                         firebase.db.collection('courts').doc(parsedCourt.id).onSnapshot(snapshot => setCheckedInPlayers([...snapshot.data().Basketball]))
                     }
                 })
@@ -60,7 +58,13 @@ const CourtShow = ({ firebase, currentUser, match }) => {
         console.log(removedPlayer)
         firebase.db.collection('courts').doc(court.id).update({
             Basketball: removedPlayer
+        }).then(() => {
+            firebase.db.collection('users').doc(currentUser.userId).update({
+                isCheckedIn: false,
+                currentCheckIn: ''
+            })
         })
+        .catch(err => console.log(err))
     } 
 
     const onSubmit = e => {
@@ -69,7 +73,6 @@ const CourtShow = ({ firebase, currentUser, match }) => {
         firebase.db.collection('courts').doc(court.id).get()
             .then(doc => {
                 if (doc.exists){
-                    debugger
                     firebase.db.collection('courts').doc(court.id).update({
                         [checkInForm.sport]: [...doc.data()[checkInForm.sport], { playerId: currentUser.userId, playerName: currentUser.displayName, message: checkInForm.message} ]
                     }).then(() => {
@@ -96,8 +99,6 @@ const CourtShow = ({ firebase, currentUser, match }) => {
             })
     }
 
-    console.log(court)
-    console.log(checkedInPlayers, 'checked inplayers <----')
     return (    
         <> 
             {  
@@ -143,7 +144,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                     checkedInPlayers.map((player, i) => {
                                         return (
                                             <li key={i}>
-                                                <p>{player.playerName}</p>
+                                                <Link to={`/main/profile/${player.playerId}`}><p>{player.playerName}</p></Link>
                                                 <p>{player.message}</p>
                                             </li>
                                         )
