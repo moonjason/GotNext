@@ -94,12 +94,15 @@ export const Container3 = styled.div`
 `
 
 export const SportDiv = styled.div`
+  background: rgb(217,208,38);
+  background: linear-gradient(90deg, rgba(217,208,38,1) 0%, rgba(233,189,33,1) 34%, rgba(255,163,26,1) 75%, rgba(255,134,0,1) 100%, rgba(252,184,69,1) 100%);
   display: flex;
   flex-direction: column;
   height: 90%;
   width: 90%;
   border: 8px outset #FF541C;
   border-radius: .9rem;
+  padding: .4rem;
 `
 
 export const SportTitle = styled.div`
@@ -147,11 +150,15 @@ export const StyledBtn = styled.button`
   padding: 1.2em 2.2em;
   margin: 0 0.3em 0.3em 0;
   border-radius: .2em;
+  filter: brightness(100%);
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   color: #FFFFFF;
   background-color: ${props => props.checkIn ? '#3369ff' : '#E86262'};
   text-align: center;
   box-shadow: inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+  &:hover {
+    filter: brightness(150%);
+  }
 `

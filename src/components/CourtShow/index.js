@@ -86,7 +86,6 @@ const CourtShow = ({ firebase, currentUser, match }) => {
     } 
 
     const onSubmit = e => {
-        console.log(checkInForm.sport)
         e.preventDefault();
         firebase.db.collection('courts').doc(court.id).get()
             .then(doc => {
@@ -125,7 +124,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                 currentUser
                     ?
                     <>
-                        <CourtTitle>{court.name}</CourtTitle>   
+                        <CourtTitle>{court.name}</CourtTitle>
                         <CourtContainer>
                             <MapBorder>
                                 <ReactMapGL 
@@ -161,40 +160,42 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 :  null 
                         }
                         </div>
+
                         <CenterContainer>
-                        <Container1>
-                            <Container2>
-                                <SportDiv>
-                                    <SportTitle>
-                                        <h1>Park Details</h1>
-                                    </SportTitle>
-                                    <CourtDiv>
-                                        <Players>
-                                            <h2><u>Address</u></h2>
-                                            <p>Lookster Chang</p>
-                                        </Players>
-                                    </CourtDiv>
-                                </SportDiv>
-                            </Container2>
-                            <Container3>
-                                <SportDiv>
-                                    <SportTitle>
-                                        <h1>Basketball</h1>
-                                    </SportTitle>
-                                    <CourtDiv>
-                                        <Players>
-                                            <h2><u>Players</u></h2>
-                                            <p>Lookster Chang</p>
-                                        </Players>
-                                        <Messages>
-                                            <h2><u>Messages</u></h2>
-                                            <p>Hi I'm gay</p>
-                                        </Messages>
-                                    </CourtDiv>
-                                </SportDiv>
-                            </Container3>
-                        </Container1>
+                            <Container1>
+                                <Container2>
+                                    <SportDiv>
+                                        <SportTitle>
+                                            <h1>Park Details</h1>
+                                        </SportTitle>
+                                        <CourtDiv>
+                                            <Players>
+                                                <h2><u>Address</u></h2>
+                                                <p>Lookster Chang</p>
+                                            </Players>
+                                        </CourtDiv>
+                                    </SportDiv>
+                                </Container2>
+                                <Container3>
+                                    <SportDiv>
+                                        <SportTitle>
+                                            <h1>Basketball</h1>
+                                        </SportTitle>
+                                        <CourtDiv>
+                                            <Players>
+                                                <h2><u>Players</u></h2>
+                                                <p>Lookster Chang</p>
+                                            </Players>
+                                            <Messages>
+                                                <h2><u>Messages</u></h2>
+                                                <p>Hi I'm gay</p>
+                                            </Messages>
+                                        </CourtDiv>
+                                    </SportDiv>
+                                </Container3>
+                            </Container1>
                         </CenterContainer>
+
                         <ModalWindow showModal={modal}>
                             <div>
                                 <form onSubmit={e => onSubmit(e)}>
