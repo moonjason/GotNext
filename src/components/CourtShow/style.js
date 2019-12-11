@@ -7,9 +7,13 @@ export const Pin = styled.img`
 
 export const CourtContainer = styled.div`
     display: flex;
-    padding: 5rem;
-    flex-direction: column;
+    padding: 1.5rem;
+    flex-direction: row;
     justify-content: center;
+`
+
+export const CourtInfo = styled.div`
+  padding-left: -30rem;
 `
 
 export const ModalWindow = styled.div`

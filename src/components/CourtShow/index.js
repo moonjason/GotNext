@@ -4,7 +4,8 @@ import {
     Pin,
     CourtContainer,
     ModalWindow,
-    ModalClose
+    ModalClose,
+    CourtInfo
  } from './style';
 
  import { Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ import {
 const CourtShow = ({ firebase, currentUser, match }) => {
     const [court, setCourt] = useState(null);
     const [viewport, setViewport] = useState({
-        width: 400,
+        width: '100vw',
         height: 400,
         zoom: 16,
     });
@@ -102,7 +103,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
     return (    
         <> 
             {  
-                court && checkedInPlayers
+                court && checkedInPlayers && currentUser
                     ?
                     <>
                         <h1>{court.name}</h1>   
@@ -133,8 +134,11 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 :   
                                     null
                         }
-
-                        <button onClick={() => removePlayerFromCourt()}>Remove</button>
+                        {
+                            currentUser.currentCheckIn === court.id
+                                ?  <button onClick={() => removePlayerFromCourt()}>Remove</button>
+                                :  null 
+                        }
                         <div>
                             <h4>Basketball</h4>
                             <h5>Player:</h5>
