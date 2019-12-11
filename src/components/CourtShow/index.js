@@ -21,7 +21,8 @@ import {
     MessageHeading,
     MessageList,
     MessageBody,
-    CenterContainer
+    CenterContainer,
+    StyledBtn
  } from './style';
 
  import { Link } from 'react-router-dom';
@@ -119,7 +120,9 @@ const CourtShow = ({ firebase, currentUser, match }) => {
     return (    
         <> 
             {  
-                court && checkedInPlayers && currentUser
+                court && 
+                // checkedInPlayers && 
+                currentUser
                     ?
                     <>
                         <CourtTitle>{court.name}</CourtTitle>   
@@ -144,23 +147,34 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 </ReactMapGL>
                             </MapBorder>
                         </CourtContainer>
-
+                        <div style={{'text-align': 'center', 'padding': '2rem'}}>
                         {
                             currentUser
                                 ?   
-                                    <button onClick={() => onClick()}>Check In</button>
+                                    <StyledBtn checkIn={true} onClick={() => onClick()}>Check In</StyledBtn>
                                 :   
                                     null
                         }
                         {
                             currentUser.currentCheckIn === court.id
-                                ?  <button onClick={() => removePlayerFromCourt()}>Remove</button>
+                                ?  <StyledBtn checkIn={false} onClick={() => removePlayerFromCourt()}>Leave</StyledBtn>
                                 :  null 
                         }
+                        </div>
                         <CenterContainer>
                         <Container1>
                             <Container2>
-                                <h1>Herro</h1>
+                                <SportDiv>
+                                    <SportTitle>
+                                        <h1>Park Details</h1>
+                                    </SportTitle>
+                                    <CourtDiv>
+                                        <Players>
+                                            <h2><u>Address</u></h2>
+                                            <p>Lookster Chang</p>
+                                        </Players>
+                                    </CourtDiv>
+                                </SportDiv>
                             </Container2>
                             <Container3>
                                 <SportDiv>
@@ -196,7 +210,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                     <input type="text" name="message" value={checkInForm.message} onChange={e => onChange(e)}/>
                                     <br/>
                                     <br/>
-                                    <button type="submit">Check-In</button>
+                                    <StyledBtn checkIn={true} type="submit">Check-In</StyledBtn>
                                 </form>
                             </div>
                         </ModalWindow>

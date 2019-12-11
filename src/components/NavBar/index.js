@@ -34,7 +34,7 @@ const NavBar = ({ currentUser, firebase }) => {
                         <LinksContainer>
                             <CurrentUser>{currentUser.displayName}</CurrentUser>
                             <Link exact to="/main" >Home</Link>
-                            <Link exact to="/main/mycheckin" >MyCheck-In</Link>
+                            <Link exact to="/main/mycheckin" >MyCheckIn</Link>
                             <Link exact to={`/main/profile/${currentUser.userId}`} >Profile</Link>
                             <Link exact to="/" onClick={() => firebase.doSignOut()} >Sign Out</Link>
                         </LinksContainer>

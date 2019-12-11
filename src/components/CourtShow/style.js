@@ -81,6 +81,9 @@ export const Container1 = styled.div`
 
 export const Container2 = styled.div`
   width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Container3 = styled.div`
@@ -95,7 +98,8 @@ export const SportDiv = styled.div`
   flex-direction: column;
   height: 90%;
   width: 90%;
-  border: .1rem solid black;
+  border: 8px outset #FF541C;
+  border-radius: .9rem;
 `
 
 export const SportTitle = styled.div`
@@ -135,4 +139,19 @@ export const CenterContainer = styled.div`
   /* width: 100vh;
   text-align: center;
   margin-left: 25px;   */
+`
+
+export const StyledBtn = styled.button`
+  cursor: pointer;
+  display: inline-block;
+  padding: 1.2em 2.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: .2em;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: ${props => props.checkIn ? '#3369ff' : '#E86262'};
+  text-align: center;
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
 `
