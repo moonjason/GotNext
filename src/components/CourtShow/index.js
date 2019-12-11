@@ -34,19 +34,15 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                     if (doc.exists) {
                         setCheckedInPlayers([...doc.data().Basketball])
                     }
-                }).catch(err => console.log(err))
-            firebase.db.collection('courts').doc(parsedCourt.id).onSnapshot(snapshot => setCheckedInPlayers([...snapshot.data().Basketball]))
+                }).then(doc => {
+                    if (doc){
+                        firebase.db.collection('courts').doc(parsedCourt.id).onSnapshot(snapshot => setCheckedInPlayers([...snapshot.data().Basketball]))
+                    }
+                })
+                .catch(err => console.log(err))
         }
         getCourt();
     }, []);
-
-//     firebase.db.collection('users').doc(authUser.uid).get()
-//     .then(doc => {
-//         setCurrentUser({...doc.data()})
-//     }).catch(err => {
-//       console.log(err)
-//     })
-//   firebase.db.collection('users').doc(authUser.uid).onSnapshot(snapshot => setCurrentUser({...snapshot.data()}))
 
     const onClick = () => {
         setModal(!modal);
@@ -77,6 +73,10 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                     firebase.db.collection('courts').doc(court.id).update({
                         [checkInForm.sport]: [...doc.data()[checkInForm.sport], { playerId: currentUser.userId, playerName: currentUser.displayName, message: checkInForm.message} ]
                     }).then(() => {
+                        firebase.db.collection('users').doc(currentUser.userId).update({
+                            isCheckedIn: true,
+                            currentCheckIn: court.id
+                        })
                         setModal(false);
                     }).catch(err => console.log(err))
                 } else {
@@ -134,21 +134,23 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                         }
 
                         <button onClick={() => removePlayerFromCourt()}>Remove</button>
-                        <h4>Basketball</h4>
-                        <h5>Player:</h5>
-                        <h5>Messages:</h5>
-                        <ul>
-                            {
-                                checkedInPlayers.map((player, i) => {
-                                    return (
-                                        <li key={i}>
-                                            <p>{player.playerName}</p>
-                                            <p>{player.message}</p>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
+                        <div>
+                            <h4>Basketball</h4>
+                            <h5>Player:</h5>
+                            <h5>Messages:</h5>
+                            <ul>
+                                {
+                                    checkedInPlayers.map((player, i) => {
+                                        return (
+                                            <li key={i}>
+                                                <p>{player.playerName}</p>
+                                                <p>{player.message}</p>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
 
                         <ModalWindow showModal={modal}>
                             <div>

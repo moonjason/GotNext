@@ -78,7 +78,7 @@ const EditProfile = ({ firebase, history, currentUser }) => {
                 Location:
                 <input type='text' name='location' value={location} placeholder="Location" onChange={e => onChange(e)}/>                
                 Bio:
-                <input type='text' name='bio' value={bio} placeholder="Bio - Say something about yourself..." onChange={e => onChange(e)}/>
+                <input type='textarea' name='bio' value={bio} placeholder="Bio - Say something about yourself..." onChange={e => onChange(e)}/>
                 Favorite Sports:
                 <input type='text' name='sportOne' value={sportOne} placeholder="Fav Sport" onChange={e => onChange(e)}/>
                 {
