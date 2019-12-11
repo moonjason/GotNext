@@ -5,8 +5,10 @@ export const NavContainer = styled.div`
     height: 50px;
     width: 100%;
     background-color: #4d4d4d;
+    opacity: 1;
     position: relative;
     box-sizing: border-box;
+    box-shadow:0px 4px 4px black;
 `
 
 export const NavHeader = styled.div`
@@ -14,11 +16,12 @@ export const NavHeader = styled.div`
 `
 
 export const NavTitle = styled.div`
+    font-family: 'Do Hyeon', sans-serif;
     display: inline-block;
-    font-size: 22px;
+    font-size: 36px;
     color: #fff;
     padding: 10px 10px 10px 10px;
-    margin-top: 1.5px;
+    margin-top: -5px;
 `
 
 export const NavBtn = styled.div`
@@ -27,9 +30,9 @@ export const NavBtn = styled.div`
 
 export const LinksContainer = styled.div`
   display: flex;
-  font-size: 18px;
+  font-size: 15px;
   float: right;
-  margin-top: 1.5px;
+  margin-top: 3px;
   margin-right: 10px;
 `
 

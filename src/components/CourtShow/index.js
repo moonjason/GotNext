@@ -5,7 +5,7 @@ import {
     CourtContainer,
     ModalWindow,
     ModalClose,
-    CourtInfo
+    MapBorder,
  } from './style';
 
  import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ import {
 const CourtShow = ({ firebase, currentUser, match }) => {
     const [court, setCourt] = useState(null);
     const [viewport, setViewport] = useState({
-        width: '100vw',
+        width: '90vw',
         height: 400,
         zoom: 16,
     });
@@ -108,23 +108,25 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                     <>
                         <h1>{court.name}</h1>   
                         <CourtContainer>
-                            <ReactMapGL 
-                                {...viewport} 
-                                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                                mapStyle="mapbox://styles/moonjason/ck3sd120z0xnq1cpu84vv7ki4" 
-                                onViewportChange={viewport => {
-                                    setViewport(viewport);
-                                }}
-                            >
-                                <Marker
-                                    latitude={court.coordinates.latitude}
-                                    longitude={court.coordinates.longitude}
-                                    offsetLeft={-25}
-                                    offsetTop={-50}
-                                >
-                                    <Pin src="/images/pin.png" alt="map marker"/>
-                                </Marker>
-                            </ReactMapGL>
+                            <MapBorder>
+                                <ReactMapGL 
+                                    {...viewport} 
+                                    mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                                    mapStyle="mapbox://styles/moonjason/ck3sd120z0xnq1cpu84vv7ki4" 
+                                    onViewportChange={viewport => {
+                                        setViewport(viewport);
+                                    }}
+                                    >
+                                    <Marker
+                                        latitude={court.coordinates.latitude}
+                                        longitude={court.coordinates.longitude}
+                                        offsetLeft={-25}
+                                        offsetTop={-50}
+                                        >
+                                        <Pin src="/images/pin.png" alt="map marker"/>
+                                    </Marker>
+                                </ReactMapGL>
+                            </MapBorder>
                         </CourtContainer>
 
                         {

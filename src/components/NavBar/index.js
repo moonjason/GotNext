@@ -6,7 +6,7 @@ import {
     NavBtn,
     LinksContainer,
     Link,
-    CurrentUser
+    CurrentUser,
 } from './style';
 import { withFirebase } from '../Firebase';
 import { NavLink } from 'react-router-dom';
@@ -17,7 +17,7 @@ const NavBar = ({ currentUser, firebase }) => {
             <NavHeader>
                 <NavLink to="/main">
                     <NavTitle>
-                        GotNext
+                        GotNEXT
                     </NavTitle>
                 </NavLink>
             </NavHeader>

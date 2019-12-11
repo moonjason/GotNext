@@ -8,8 +8,11 @@ export const Pin = styled.img`
 export const CourtContainer = styled.div`
     display: flex;
     padding: 1.5rem;
-    flex-direction: row;
     justify-content: center;
+`
+export const MapBorder = styled.div`
+  border: .5rem outset #FF9B40;
+  border-radius: .9rem;
 `
 
 export const CourtInfo = styled.div`
