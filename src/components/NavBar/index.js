@@ -5,17 +5,21 @@ import {
     NavTitle,
     NavBtn,
     LinksContainer,
-    Link
+    Link,
+    CurrentUser
 } from './style';
 import { withFirebase } from '../Firebase';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = ({ currentUser, firebase }) => {
     return (
         <NavContainer>
             <NavHeader>
-                <NavTitle>
-                    GotNext
-                </NavTitle>
+                <NavLink to="/main">
+                    <NavTitle>
+                        GotNext
+                    </NavTitle>
+                </NavLink>
             </NavHeader>
             <NavBtn>
                 <label htmlFor="nav-check">
@@ -28,7 +32,7 @@ const NavBar = ({ currentUser, firebase }) => {
                 currentUser
                     ?
                         <LinksContainer>
-                            <Link exact to="/">{currentUser.displayName}</Link>
+                            <CurrentUser>{currentUser.displayName}</CurrentUser>
                             <Link exact to="/main" >Home</Link>
                             <Link exact to="/main/mycheckin" >MyCheck-In</Link>
                             <Link exact to="/main/profile" >Profile</Link>

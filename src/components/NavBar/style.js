@@ -48,3 +48,11 @@ export const Link = styled(NavLink)`
         background-color: rgba(255, 255, 255, 0.8); 
     }
 `
+
+export const CurrentUser = styled.div`
+    display: inline-block;
+    padding: 13px 10px 13px 10px;
+    text-decoration: none;
+    color: #efefef;
+    border-radius: 50px;
+`

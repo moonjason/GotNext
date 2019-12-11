@@ -3,6 +3,7 @@ import { withFirebase } from '../Firebase';
 
 const MyCheckIn = ({ currentUser, firebase }) => {
     const [checkedInPlayers, setCheckedInPlayers] = useState(null)
+    const [courtName, setCourtName] = useState(null)
 
     useEffect(() => {
         if (currentUser !== null) {
@@ -11,6 +12,7 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                 .then(doc => {
                     if (doc.exists) {
                         setCheckedInPlayers([...doc.data().Basketball])
+                        setCourtName(doc.data().courtName)
                     }
                 }).catch(err => console.log(err))
                 firebase.db.collection('courts').doc(currentUser.currentCheckIn).onSnapshot(snapshot => setCheckedInPlayers([...snapshot.data().Basketball]))
@@ -22,11 +24,13 @@ const MyCheckIn = ({ currentUser, firebase }) => {
     return (
         <>
         {  
-            checkedInPlayers 
+            checkedInPlayers && courtName
                 ? 
                     <div>
+                        <h1>Currently checked in at: </h1>
+                        <h1>{courtName}</h1>
                         <h4>Basketball</h4>
-                        <h5>Player:</h5>
+                        <h5>Players:</h5>
                         <h5>Messages:</h5>
                         <ul>
                             {
@@ -42,7 +46,7 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                         </ul>
                     </div>
                 :
-                    <div> yoyoyoyoyo</div>
+                    <div>Loading</div>
         }
         </>
     )
