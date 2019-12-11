@@ -15,6 +15,13 @@ export const MapBorder = styled.div`
   border-radius: .9rem;
 `
 
+export const CourtTitle = styled.h1`
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 2rem;
+`
+
 export const CourtInfo = styled.div`
   padding-left: -30rem;
 `
@@ -63,4 +70,69 @@ export const ModalClose = styled.a`
   &:hover {
     color: black;
   }
+`
+
+export const Container1 = styled.div`
+  min-height: 25rem;
+  width: 69rem;
+  display: flex;
+  margin-left: 8rem;
+`
+
+export const Container2 = styled.div`
+  width: 40%;
+`
+
+export const Container3 = styled.div`
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const SportDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 90%;
+  border: .1rem solid black;
+`
+
+export const SportTitle = styled.div`
+`
+
+export const CourtDiv = styled.div`
+  display: flex;
+`
+
+export const Players = styled.div`
+  width: 50%;
+`
+
+export const PlayerHeading = styled.h3`
+  height: 5%;
+  text-align: center;
+`
+
+export const PlayerList = styled.div`
+  height: 95%;
+`
+ 
+export const Messages = styled.div`
+  width: 50%;
+`
+
+export const MessageHeading = styled.h3`
+  height: 5%;
+  text-align: center;
+`
+
+export const MessageList = styled.div`
+  height: 95%;
+`
+
+export const CenterContainer = styled.div`
+  /* width: 100vh;
+  text-align: center;
+  margin-left: 25px;   */
 `

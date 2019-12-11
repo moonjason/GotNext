@@ -6,6 +6,22 @@ import {
     ModalWindow,
     ModalClose,
     MapBorder,
+    CourtTitle,
+    Container1,
+    Container2,
+    Container3,
+    SportTitle,
+    SportDiv,
+    CourtDiv,
+    Players,
+    PlayerHeading,
+    PlayerList,
+    PlayerBody,
+    Messages,
+    MessageHeading,
+    MessageList,
+    MessageBody,
+    CenterContainer
  } from './style';
 
  import { Link } from 'react-router-dom';
@@ -106,7 +122,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                 court && checkedInPlayers && currentUser
                     ?
                     <>
-                        <h1>{court.name}</h1>   
+                        <CourtTitle>{court.name}</CourtTitle>   
                         <CourtContainer>
                             <MapBorder>
                                 <ReactMapGL 
@@ -141,24 +157,30 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 ?  <button onClick={() => removePlayerFromCourt()}>Remove</button>
                                 :  null 
                         }
-                        <div>
-                            <h4>Basketball</h4>
-                            <h5>Player:</h5>
-                            <h5>Messages:</h5>
-                            <ul>
-                                {
-                                    checkedInPlayers.map((player, i) => {
-                                        return (
-                                            <li key={i}>
-                                                <Link to={`/main/profile/${player.playerId}`}><p>{player.playerName}</p></Link>
-                                                <p>{player.message}</p>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        </div>
-
+                        <CenterContainer>
+                        <Container1>
+                            <Container2>
+                                <h1>Herro</h1>
+                            </Container2>
+                            <Container3>
+                                <SportDiv>
+                                    <SportTitle>
+                                        <h1>Basketball</h1>
+                                    </SportTitle>
+                                    <CourtDiv>
+                                        <Players>
+                                            <h2><u>Players</u></h2>
+                                            <p>Lookster Chang</p>
+                                        </Players>
+                                        <Messages>
+                                            <h2><u>Messages</u></h2>
+                                            <p>Hi I'm gay</p>
+                                        </Messages>
+                                    </CourtDiv>
+                                </SportDiv>
+                            </Container3>
+                        </Container1>
+                        </CenterContainer>
                         <ModalWindow showModal={modal}>
                             <div>
                                 <form onSubmit={e => onSubmit(e)}>
