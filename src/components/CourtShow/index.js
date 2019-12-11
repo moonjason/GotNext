@@ -60,11 +60,12 @@ const CourtShow = ({ firebase, currentUser, match }) => {
     }
 
     const removePlayerFromCourt = () => {
-        firebase.db.collection('courts').doc(court.id)
-        .update({
-            "Basketball.playerId": firebase.FieldValue.arrayRemove("FjTKfKf0kKaYPisSorn5CT8vSJl1")
-        }).catch(err => console.log(err))
-    }
+        const removedPlayer = checkedInPlayers.filter(player => player.playerId !== currentUser.userId )
+        console.log(removedPlayer)
+        firebase.db.collection('courts').doc(court.id).update({
+            Basketball: removedPlayer
+        })
+    } 
 
     const onSubmit = e => {
         console.log(checkInForm.sport)
@@ -72,6 +73,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
         firebase.db.collection('courts').doc(court.id).get()
             .then(doc => {
                 if (doc.exists){
+                    debugger
                     firebase.db.collection('courts').doc(court.id).update({
                         [checkInForm.sport]: [...doc.data()[checkInForm.sport], { playerId: currentUser.userId, playerName: currentUser.displayName, message: checkInForm.message} ]
                     }).then(() => {
