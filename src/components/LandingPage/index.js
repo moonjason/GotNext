@@ -1,13 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { 
+    Container,
+    Title,
+    InnerContainer,
+    StyledLink
+ } from './style';
+
 const LandingPage = () => {
     return (
-        <>
-            <h1>Landing Page</h1>
-            <Link to="/main">Find Parks</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-        </>
+        <Container>
+            <InnerContainer>
+                <Title>GotNEXT<img src="./images/gotnextpic.png" style={{'max-width': '4rem'}} alt=""/></Title>
+                <StyledLink to="/main">Find Parks</StyledLink>
+                <StyledLink to="/login">Login</StyledLink>
+                <StyledLink to="/register">Register</StyledLink>
+            </InnerContainer>
+        </Container>
     )
 }
 
