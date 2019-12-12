@@ -57,10 +57,10 @@ const Register = ({ firebase, history }) => {
                     <input type='text' name='displayName' value={displayName} placeholder="DISPLAY NAME" onChange={(e) => onChange(e)}/>
                     <br/>
                     <p>Password:</p>
-                    <input type='text' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
+                    <input type='password' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
                     <br/>
                     <p>Confirm Password:</p>
-                    <input type='text' name='password2' value={password2} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
+                    <input type='password' name='password2' value={password2} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
                     <br/>
                     <input type='submit' value='submit' disabled={isInvalid}/>
                     {error && <p>{error.message}</p>}

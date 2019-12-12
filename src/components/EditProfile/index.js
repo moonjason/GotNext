@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
+import {
+    EditContainer,
+    InnerContainer
+} from './style';
 
 const EditProfile = ({ firebase, history, currentUser }) => {
     const [profileForm, setProfile] = useState({
@@ -69,21 +73,24 @@ const EditProfile = ({ firebase, history, currentUser }) => {
     const { socialOne, socialTwo, socialThree } = socialUrls;
     const isInvalid = false; 
     return (
-        <>
+        <EditContainer>
+            <InnerContainer>
             <h1>Edit Your Profile</h1>
             <form onSubmit={e => onSubmit(e)}>
-                Profile Picture:
+                <p>Profile Picture:</p>
                 <input type="file" onChange={e => addProfilePic(e)} accept='image/*'/>
-                <img src={imgUrl} alt=""/>
-                Location:
-                <input type='text' name='location' value={location} placeholder="Location" onChange={e => onChange(e)}/>                
-                Bio:
+                <br/>
+                <img src={imgUrl} alt="" style={{'max-width': '8rem'}}/>
+                <p>Location:</p>
+                <input type='text' name='location' value={location} placeholder="Location" onChange={e => onChange(e)}/>              
+                <br/>
+                <p>Bio:</p>
                 <input type='textarea' name='bio' value={bio} placeholder="Bio - Say something about yourself..." onChange={e => onChange(e)}/>
-                Favorite Sports:
+                <p>Favorite Sports:</p>
                 <input type='text' name='sportOne' value={sportOne} placeholder="Fav Sport" onChange={e => onChange(e)}/>
                 {
                     sportOne !== ''
-                    ?            
+                    ?         
                      <input type='text' name='sportTwo' value={sportTwo} placeholder="2nd Fav Sport" onChange={e => onChange(e)}/>
                     : '' 
                 }
@@ -93,8 +100,8 @@ const EditProfile = ({ firebase, history, currentUser }) => {
                      <input type='text' name='sportThree' value={sportThree} placeholder="3rd Fav Sport" onChange={e => onChange(e)}/>
                     : '' 
                 }
-                
-                Social Links:
+                <br/>
+                <p>Social Links:</p>
                 <input type='text' name='socialOne' value={socialOne} placeholder="Social Link" onChange={e => onChange(e)}/>
                 {
                     socialOne !== ''
@@ -108,10 +115,11 @@ const EditProfile = ({ firebase, history, currentUser }) => {
                     <input type='text' name='socialThree' value={socialThree} placeholder="3rd Social Link" onChange={e => onChange(e)}/>
                     : ''
                 }
-
+                <br/>
                 <input type='submit' value='Submit' disabled={isInvalid}/>
             </form>
-        </>
+            </InnerContainer>
+        </EditContainer>
     )
 }
 

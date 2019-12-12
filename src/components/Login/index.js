@@ -49,7 +49,7 @@ const Login = ({ firebase, history }) => {
                     <p>Email:</p>
                     <input type='text' name='email' value={email} placeholder="EMAIL" onChange={(e) => onChange(e)}/>
                     <p>Password:</p>
-                    <input type='text' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
+                    <input type='password' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
                     <br/>
                     <input type='submit' value='submit' disabled={isInvalid}/>
                     {error && <p>{error.message}</p>}

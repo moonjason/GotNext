@@ -27,8 +27,9 @@ const ProfileShow = ({ currentUser, match, firebase }) => {
     return(
         <>
         {
-            showUser 
+            showUser
                 ?
+                    <>
                     <SetContainerMiddle>
                         <ProfileContainer>
                             <h1 style={{"fontFamily": "'Do Hyeon', sans-serif", "fontSize": "3rem"}}>{showUser.displayName.concat("'s")} Profile</h1>
@@ -53,12 +54,14 @@ const ProfileShow = ({ currentUser, match, firebase }) => {
                                 })
                             }
                             <br/>
-                            {currentUser && currentUser.userId === match.params.id
-                                ? <Link to={'/main/profile/edit'}>Edit Profile</Link>
-                                : null
-                            }
                         </ProfileContainer>
                     </SetContainerMiddle>
+                    {
+                        currentUser
+                            ? currentUser.userId === match.params.id ?  <Link to={'/main/profile/edit'}>Edit Profile</Link> : null
+                            : null
+                    }
+                    </>
                 :       
                     <MoonLoader
                         css={override}
