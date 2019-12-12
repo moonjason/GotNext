@@ -25,7 +25,8 @@ import {
     CardContactTitle,
     DetailP,
     PlayerP,
-    ModalInput
+    ModalInput,
+    CourtDetailP
 } from './style';
 
 import { css } from "@emotion/core";
@@ -88,7 +89,6 @@ const CourtShow = ({ firebase, currentUser, match }) => {
 
     const removePlayerFromCourt = () => {
         const removedPlayer = checkedInPlayers.filter(player => player.playerId !== currentUser.userId )
-        console.log(removedPlayer)
         firebase.db.collection('courts').doc(court.id).update({
             Basketball: removedPlayer
         }).then(() => {
@@ -186,16 +186,16 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                                 <br/>
                                                 <CardAddressTitle><u>Address</u></CardAddressTitle>
                                                     { court.location.display_address.map((address, i) => 
-                                                        <DetailP key={i}>{address}</DetailP>
+                                                        <CourtDetailP key={i}>{address}</CourtDetailP>
                                                     )}
                                                 <br/>
                                                 <CardCategoriesTitle><u>Categories</u></CardCategoriesTitle>
                                                     { court.categories.map((cat, i) => 
-                                                        <DetailP key={i}>{cat.title}</DetailP>
+                                                        <CourtDetailP key={i}>{cat.title}</CourtDetailP>
                                                     )}
                                                 <br/>
                                                 <CardContactTitle><u>Contact</u></CardContactTitle>
-                                                    <DetailP>{court.display_phone}</DetailP>
+                                                    <CourtDetailP>{court.display_phone}</CourtDetailP>
                                             </Players>
                                         </CourtDiv>
                                     </SportDiv>

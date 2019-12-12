@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { withFirebase } from '../Firebase';
 import { Link } from 'react-router-dom';
+import {
+    CenterContainer,
+    Container1,
+    SportDiv,
+    SportTitle,
+    CardTitle,
+    CourtDiv,
+    Players,
+    CardPlayersTitle,
+    PlayerP,
+    Messages,
+    CardMessagesTitle,
+    DetailP,
+    StyledBtn
+} from './style';
 
 const MyCheckIn = ({ currentUser, firebase }) => {
     const [checkedInPlayers, setCheckedInPlayers] = useState(null)
@@ -20,35 +35,62 @@ const MyCheckIn = ({ currentUser, firebase }) => {
             }
         }
     }, [currentUser])
+
+    const removePlayerFromCourt = () => {
+        const removedPlayer = checkedInPlayers.filter(player => player.playerId !== currentUser.userId )
+        firebase.db.collection('courts').doc(currentUser.currentCheckIn).update({
+            Basketball: removedPlayer
+        }).then(() => {
+            firebase.db.collection('users').doc(currentUser.userId).update({
+                isCheckedIn: false,
+                currentCheckIn: ''
+            })
+        })
+        .catch(err => console.log(err))
+    } 
+
     
     const renderContent = () => {
         if(currentUser.currentCheckIn !== ''){
             return (
-                    <div>
-                        <h1>Currently checked in at: </h1>
-                        <h1>{courtName}</h1>
-                        <h4>Basketball</h4>
-                        <h5>Players:</h5>
-                        <h5>Messages:</h5>
-                        <ul>
-                            {
-                                checkedInPlayers.map((player, i) => {
-                                    return (
-                                        <li key={i}>
-                                            <Link to={`/main/profile/${player.playerId}`}><p>{player.playerName}</p></Link>
-                                            <p>{player.message}</p>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </div>
+                <CenterContainer>
+                <h1 style={{'fontFamily': "'Do Hyeon', sans-serif", 'marginTop': '1rem'}}>Current CheckIn:</h1>
+                <h1 style={{'fontFamily': "'Do Hyeon', sans-serif"}}>{courtName}</h1>
+                <StyledBtn checkIn={false} onClick={() => removePlayerFromCourt()}>Leave</StyledBtn>
+                <Container1>
+                        <SportDiv>
+                                    <SportTitle>
+                                        <CardTitle>Basketball Players:{' '}{checkedInPlayers.length}</CardTitle>
+                                    </SportTitle>
+                                    <CourtDiv>
+                                        <Players>
+                                            <br/>
+                                            <CardPlayersTitle><u>Players</u></CardPlayersTitle>
+                                            {
+                                                checkedInPlayers.map((player, i) => 
+                                                    <Link to={`/main/profile/${player.playerId}`} key={i}><PlayerP>{player.playerName}</PlayerP></Link>
+                                                )
+                                            }
+                                        </Players>
+                                        <Messages>
+                                            <br/>
+                                            <CardMessagesTitle><u>Messages</u></CardMessagesTitle>
+                                            {
+                                                checkedInPlayers.map((player, i) => 
+                                                    <DetailP key={i}>{player.message}</DetailP>
+                                                )
+                                            }
+                                        </Messages>
+                                    </CourtDiv>
+                            </SportDiv>
+                </Container1>
+            </CenterContainer>
             )
         } else {
             return(
-                <div>
+                <div style={{'textAlign': 'center', 'marginTop': '2rem', 'fontFamily': "'Do Hyeon', sans-serif"}}>
                     <h1>You are currently not checked in anywhere!</h1>
-                    <h3>Click here to look for parks</h3>
+                    <h3>Click <Link to="/main">here</Link> to look for parks</h3>
                 </div>
             )
         }
@@ -63,10 +105,10 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                     <div>
                         {renderContent()}
                     </div>
-                :
-                    <div>
+                :   
+                    <div style={{'textAlign': 'center', 'marginTop': '2rem', 'fontFamily': "'Do Hyeon', sans-serif"}}>
                         <h1>You are currently not checked in anywhere!</h1>
-                        <h3>Click here to look for parks</h3>
+                        <h3>Click <Link to="/main">here</Link> to look for parks</h3>
                     </div>
         }
         </>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Pin = styled.img`
     width: 40px;
@@ -101,9 +101,6 @@ export const SportDiv = styled.div`
   padding: .4rem;
 `
 
-export const SportTitle = styled.div`
-`
-
 export const CourtDiv = styled.div`
   display: flex;
 `
@@ -123,6 +120,8 @@ export const PlayerList = styled.div`
  
 export const Messages = styled.div`
   width: 50%;
+`
+export const SportTitle = styled.div`
 `
 
 export const MessageHeading = styled.h3`
@@ -195,18 +194,40 @@ export const CardCategoriesTitle= styled.h2`
   box-shadow:0px 2px 2px black;
   width: 54%;
 `
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    color: #00FF59;
+  }
+  50%{
+    opacity: .6;
+    color: #00FF59;
+  }
+  100% {
+    opacity: 1;
+    color: black;
+  }
+`
 
 export const PlayerP = styled.p`
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-size: 1rem;
+  animation: ${fadeIn} 1.2s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
 `
 
 export const DetailP = styled.p`
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 1rem;
+  animation: ${fadeIn} 1.2s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
 `
+export const CourtDetailP = styled.p`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+`
+
 export const ModalInput = styled.input`
   width: 80%;
   padding: 12px 20px;
