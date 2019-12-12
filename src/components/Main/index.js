@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import CourtList from '../CourtList';
 
+import {
+    MainTitle,
+    Instruction,
+    SearchBar,
+    MainContainer,
+    StyledBtn
+} from './style'
+
 const Main = () => {
     const [location, setLocation] = useState('');
     const [courts, setCourts] = useState([]);
@@ -17,13 +25,14 @@ const Main = () => {
     }
 
     return (
-        <>
-            <h1>Main Search Component</h1>
-            Location: 
-            <input type="text" name="search" onChange={(e) => setLocation(e.target.value)} placeholder="Address, neighboorhood, city, or zip"/>
-            <button onClick={() => getCourts(location)}>Get Courts</button>
+        <MainContainer>
+            <MainTitle>Search for a Park</MainTitle>
+            <Instruction>Enter a Location:</Instruction>
+            <SearchBar type="text" name="search" onChange={(e) => setLocation(e.target.value)} placeholder="Address, neighboorhood, city, or zip"/>
+            <br/>
+            <StyledBtn onClick={() => getCourts(location)}>Get Courts</StyledBtn>
             <CourtList courts={courts}/>
-        </>
+        </MainContainer>
     )
 }
  

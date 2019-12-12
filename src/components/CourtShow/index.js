@@ -187,33 +187,38 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                         </CourtDiv>
                                     </SportDiv>
                                 </Container2>
-                                <Container3>
-                                    <SportDiv>
-                                        <SportTitle>
-                                            <CardTitle>Basketball</CardTitle>
-                                        </SportTitle>
-                                        <CourtDiv>
-                                            <Players>
-                                                <br/>
-                                                <CardPlayersTitle><u>Players</u></CardPlayersTitle>
-                                                {
-                                                    checkedInPlayers.map((player, i) => 
-                                                        <Link to={`/main/profile/${player.playerId}`}><p key={i}>{player.playerName}</p></Link>
-                                                    )
-                                                }
-                                            </Players>
-                                            <Messages>
-                                                <br/>
-                                                <CardMessagesTitle><u>Messages</u></CardMessagesTitle>
-                                                {
-                                                    checkedInPlayers.map((player, i) => 
-                                                        <p key={i}>{player.message}</p>
-                                                    )
-                                                }
-                                            </Messages>
-                                        </CourtDiv>
-                                    </SportDiv>
-                                </Container3>
+                                {
+                                    checkedInPlayers
+                                        ?
+                                        <Container3>
+                                            <SportDiv>
+                                                <SportTitle>
+                                                    <CardTitle>Basketball</CardTitle>
+                                                </SportTitle>
+                                                <CourtDiv>
+                                                    <Players>
+                                                        <br/>
+                                                        <CardPlayersTitle><u>Players</u></CardPlayersTitle>
+                                                        {
+                                                            checkedInPlayers.map((player, i) => 
+                                                                <Link to={`/main/profile/${player.playerId}`}><p key={i}>{player.playerName}</p></Link>
+                                                            )
+                                                        }
+                                                    </Players>
+                                                    <Messages>
+                                                        <br/>
+                                                        <CardMessagesTitle><u>Messages</u></CardMessagesTitle>
+                                                        {
+                                                            checkedInPlayers.map((player, i) => 
+                                                                <p key={i}>{player.message}</p>
+                                                            )
+                                                        }
+                                                    </Messages>
+                                                </CourtDiv>
+                                            </SportDiv>
+                                        </Container3>
+                                        : null 
+                                }
                             </Container1>
                         </CenterContainer>
 
