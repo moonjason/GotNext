@@ -53,7 +53,7 @@ const ProfileShow = ({ currentUser, match, firebase }) => {
                                 })
                             }
                             <br/>
-                            {showUser.userId === match.params.id
+                            {currentUser && currentUser.userId === match.params.id
                                 ? <Link to={'/main/profile/edit'}>Edit Profile</Link>
                                 : null
                             }
