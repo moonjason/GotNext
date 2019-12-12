@@ -14,15 +14,15 @@ import {
     SportDiv,
     CourtDiv,
     Players,
-    PlayerHeading,
-    PlayerList,
-    PlayerBody,
     Messages,
-    MessageHeading,
-    MessageList,
-    MessageBody,
     CenterContainer,
-    StyledBtn
+    StyledBtn,
+    CardTitle,
+    CardPlayersTitle,
+    CardMessagesTitle,
+    CardAddressTitle,
+    CardCategoriesTitle,
+    CardContactTitle
  } from './style';
 
  import { Link } from 'react-router-dom';
@@ -115,7 +115,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                 console.log(err);
             })
     }
-
+    console.log(court)
     return (    
         <> 
             {  
@@ -146,7 +146,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 </ReactMapGL>
                             </MapBorder>
                         </CourtContainer>
-                        <div style={{'text-align': 'center', 'padding': '2rem'}}>
+                        <div style={{'textAlign': 'center', 'padding': '2rem'}}>
                         {
                             currentUser
                                 ?   
@@ -166,11 +166,17 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 <Container2>
                                     <SportDiv>
                                         <SportTitle>
-                                            <h1>Park Details</h1>
+                                            <CardTitle>Park Details</CardTitle>
                                         </SportTitle>
                                         <CourtDiv>
                                             <Players>
-                                                <h2><u>Address</u></h2>
+                                                <br/>
+                                                <CardAddressTitle><u>Address</u></CardAddressTitle>
+                                                <br/>
+                                                <CardCategoriesTitle><u>Categories</u></CardCategoriesTitle>
+                                                <br/>
+                                                <CardContactTitle><u>Contact</u></CardContactTitle>
+
                                                 <p>Lookster Chang</p>
                                             </Players>
                                         </CourtDiv>
@@ -179,15 +185,17 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 <Container3>
                                     <SportDiv>
                                         <SportTitle>
-                                            <h1>Basketball</h1>
+                                            <CardTitle>Basketball</CardTitle>
                                         </SportTitle>
                                         <CourtDiv>
                                             <Players>
-                                                <h2><u>Players</u></h2>
+                                                <br/>
+                                                <CardPlayersTitle><u>Players</u></CardPlayersTitle>
                                                 <p>Lookster Chang</p>
                                             </Players>
                                             <Messages>
-                                                <h2><u>Messages</u></h2>
+                                                <br/>
+                                                <CardMessagesTitle><u>Messages</u></CardMessagesTitle>
                                                 <p>Hi I'm gay</p>
                                             </Messages>
                                         </CourtDiv>

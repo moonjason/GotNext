@@ -162,3 +162,41 @@ export const StyledBtn = styled.button`
     filter: brightness(150%);
   }
 `
+export const CardTitle = styled.h1`
+  font-family: 'Do Hyeon', sans-serif;
+  color: black;
+  box-shadow:0px 4px 4px black;
+`
+export const CardPlayersTitle= styled.h2`
+  font-family: 'Do Hyeon', sans-serif;
+  color: black;
+  box-shadow:0px 2px 2px black;
+  width: 27%;
+`
+export const CardMessagesTitle= styled.h2`
+  font-family: 'Do Hyeon', sans-serif;
+  color: black;
+  box-shadow:0px 2px 2px black;
+  width: 34%;
+`
+export const CardAddressTitle= styled.h2`
+  font-family: 'Do Hyeon', sans-serif;
+  color: black;
+  box-shadow:0px 2px 2px black;
+  width: 41%;
+`
+
+export const CardContactTitle= styled.h2`
+  font-family: 'Do Hyeon', sans-serif;
+  color: black;
+  box-shadow:0px 2px 2px black;
+  width: 39.5%;
+`
+
+export const CardCategoriesTitle= styled.h2`
+  font-family: 'Do Hyeon', sans-serif;
+  color: black;
+  box-shadow:0px 2px 2px black;
+  width: 54%;
+`
+

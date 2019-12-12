@@ -40,15 +40,15 @@ export const Link = styled(NavLink)`
     display: inline-block;
     padding: 13px 10px 13px 10px;
     text-decoration: none;
-    color: #efefef;
+    color: #aaa;
     border-radius: 50px;
     &:hover{
         color: #0D98BA;
-        background-color: rgba(255, 255, 255, 0.5); 
+        background-color: rgba(255, 255, 255, 1); 
     }
     &.active{
         color: #0D98BA;
-        background-color: rgba(255, 255, 255, 0.8); 
+        background-color: rgba(255, 255, 255, 1); 
     }
 `
 
