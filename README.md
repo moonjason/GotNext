@@ -2,5 +2,5 @@
 
 ### An app to find basketball players 
 
-![Parks](./public/ss1.png)
-![Parsk2](./public/ss2.png)
+![Parks](./public/images/ss1.png)
+![Parks2](./public/images/ss2.png)
