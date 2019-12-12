@@ -172,12 +172,17 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                             <Players>
                                                 <br/>
                                                 <CardAddressTitle><u>Address</u></CardAddressTitle>
+                                                    { court.location.display_address.map((address, i) => 
+                                                        <p key={i}>{address}</p>
+                                                    )}
                                                 <br/>
                                                 <CardCategoriesTitle><u>Categories</u></CardCategoriesTitle>
+                                                    { court.categories.map((cat, i) => 
+                                                        <p key={i}>{cat.title}</p>
+                                                    )}
                                                 <br/>
                                                 <CardContactTitle><u>Contact</u></CardContactTitle>
-
-                                                <p>Lookster Chang</p>
+                                                    <p>{court.display_phone}</p>
                                             </Players>
                                         </CourtDiv>
                                     </SportDiv>
@@ -191,12 +196,20 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                             <Players>
                                                 <br/>
                                                 <CardPlayersTitle><u>Players</u></CardPlayersTitle>
-                                                <p>Lookster Chang</p>
+                                                {
+                                                    checkedInPlayers.map((player, i) => 
+                                                        <Link to={`/main/profile/${player.playerId}`}><p key={i}>{player.playerName}</p></Link>
+                                                    )
+                                                }
                                             </Players>
                                             <Messages>
                                                 <br/>
                                                 <CardMessagesTitle><u>Messages</u></CardMessagesTitle>
-                                                <p>Hi I'm gay</p>
+                                                {
+                                                    checkedInPlayers.map((player, i) => 
+                                                        <p key={i}>{player.message}</p>
+                                                    )
+                                                }
                                             </Messages>
                                         </CourtDiv>
                                     </SportDiv>
