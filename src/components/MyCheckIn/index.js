@@ -17,10 +17,18 @@ import {
     StyledBtn
 } from './style';
 
+import { css } from "@emotion/core";
+import MoonLoader from "react-spinners/MoonLoader";
+
 const MyCheckIn = ({ currentUser, firebase }) => {
     const [checkedInPlayers, setCheckedInPlayers] = useState(null)
     const [courtName, setCourtName] = useState(null)
     const [isCheckedIn, setIsCheckedIn] = useState(null)
+    const [loading, setLoading] = useState(true)
+    const override = css`
+        display: block;
+        margin: 2rem auto;
+    `; 
 
     useEffect(() => {
         if (currentUser !== null) {
@@ -37,6 +45,9 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                 setIsCheckedIn('')
             }
         }
+        setInterval(() =>{
+            setLoading(false);
+        }, 900)
     }, [currentUser])
 
     const removePlayerFromCourt = () => {
@@ -108,7 +119,13 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                     <div>
                         {renderContent()}
                     </div>
-                :   <div>...loading</div>
+                :                           
+                    <MoonLoader
+                        css={override}
+                        size={69}
+                        color={"orangered"}
+                        loading={loading}
+                    />
         }
         {
             isCheckedIn === ''

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
 import {
     Container,
-    InnerContainer
+    InnerContainer,
+    Title
 } from './style';
 
 const Login = ({ firebase, history }) => {
@@ -42,6 +43,7 @@ const Login = ({ firebase, history }) => {
     return (
         <Container>
             <InnerContainer>
+                <Title>GotNEXT<img src="./images/gotnextpic.png" style={{'maxWidth': '4rem'}} alt=""/></Title>
                 <h1>Login</h1>
                 <form onSubmit={(e) => onSubmit(e)}>
                     <p>Email:</p>

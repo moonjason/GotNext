@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
 import {
     Container,
-    InnerContainer
+    InnerContainer,
+    Title
 } from './style';
 const Register = ({ firebase, history }) => {
     const [userForm, setUserForm] = useState({
@@ -46,6 +47,7 @@ const Register = ({ firebase, history }) => {
     return (
         <Container>
             <InnerContainer>
+                <Title>GotNEXT<img src="./images/gotnextpic.png" style={{'maxWidth': '4rem'}} alt=""/></Title>
                 <h1>Register</h1>
                 <form onSubmit={(e) => onSubmit(e)}>
                     <p>Email:</p>

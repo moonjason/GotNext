@@ -12,11 +12,16 @@ export const Container = styled.div`
 
 export const InnerContainer = styled.div`
     margin-top: 10rem;
-    width: 28%;
+    width: 38%;
     height: 55%;
     background: rgba(255, 255, 255, .8);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+`
+export const Title = styled.h1`
+    font-size: 7rem;
+    font-family: 'Do Hyeon', sans-serif;
+    display: block;
 `
