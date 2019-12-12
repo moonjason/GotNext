@@ -22,7 +22,9 @@ import {
     CardMessagesTitle,
     CardAddressTitle,
     CardCategoriesTitle,
-    CardContactTitle
+    CardContactTitle,
+    DetailP,
+    PlayerP
  } from './style';
 
  import { Link } from 'react-router-dom';
@@ -115,7 +117,6 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                 console.log(err);
             })
     }
-    console.log(court)
     return (    
         <> 
             {  
@@ -173,16 +174,16 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                                 <br/>
                                                 <CardAddressTitle><u>Address</u></CardAddressTitle>
                                                     { court.location.display_address.map((address, i) => 
-                                                        <p key={i}>{address}</p>
+                                                        <DetailP key={i}>{address}</DetailP>
                                                     )}
                                                 <br/>
                                                 <CardCategoriesTitle><u>Categories</u></CardCategoriesTitle>
                                                     { court.categories.map((cat, i) => 
-                                                        <p key={i}>{cat.title}</p>
+                                                        <DetailP key={i}>{cat.title}</DetailP>
                                                     )}
                                                 <br/>
                                                 <CardContactTitle><u>Contact</u></CardContactTitle>
-                                                    <p>{court.display_phone}</p>
+                                                    <DetailP>{court.display_phone}</DetailP>
                                             </Players>
                                         </CourtDiv>
                                     </SportDiv>
@@ -201,7 +202,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                                         <CardPlayersTitle><u>Players</u></CardPlayersTitle>
                                                         {
                                                             checkedInPlayers.map((player, i) => 
-                                                                <Link to={`/main/profile/${player.playerId}`}><p key={i}>{player.playerName}</p></Link>
+                                                                <Link to={`/main/profile/${player.playerId}`}><PlayerP key={i}>{player.playerName}</PlayerP></Link>
                                                             )
                                                         }
                                                     </Players>
@@ -210,7 +211,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                                         <CardMessagesTitle><u>Messages</u></CardMessagesTitle>
                                                         {
                                                             checkedInPlayers.map((player, i) => 
-                                                                <p key={i}>{player.message}</p>
+                                                                <DetailP key={i}>{player.message}</DetailP>
                                                             )
                                                         }
                                                     </Messages>

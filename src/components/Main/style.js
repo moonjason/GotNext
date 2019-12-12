@@ -27,6 +27,10 @@ export const SearchBar = styled.input`
     font-size: 1.5rem;
     border-radius: 1rem;    
     text-align: center;
+    outline: none;
+    &:focus {
+        border: .2rem solid orange;
+    }
 `
 
 export const StyledBtn = styled.button`

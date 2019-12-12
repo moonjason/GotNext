@@ -61,35 +61,13 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                 ? 
 
                     <div>
-                            {renderContent()}
-                            {/* currentUser.currentCheckIn !== '' */}
-                            
-                            {/* <h1>Currently checked in at: </h1>
-                            <h1>{courtName}</h1>
-                            <h4>Basketball</h4>
-                            <h5>Players:</h5>
-                            <h5>Messages:</h5>
-                            <ul>
-                                {
-                                    checkedInPlayers.map((player, i) => {
-                                        return (
-                                            <li key={i}>
-                                                <Link to={`/main/profile/${player.playerId}`}><p>{player.playerName}</p></Link>
-                                                <p>{player.message}</p>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        
-                            <div>
-                                <h1>You are currently not checked in anywhere!</h1>
-                                <h3>Click here to look for parks</h3>
-                            </div> */}
-
+                        {renderContent()}
                     </div>
                 :
-                    <div>...Loading</div>
+                    <div>
+                        <h1>You are currently not checked in anywhere!</h1>
+                        <h3>Click here to look for parks</h3>
+                    </div>
         }
         </>
     )

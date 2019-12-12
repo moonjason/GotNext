@@ -82,15 +82,11 @@ export const Container1 = styled.div`
 export const Container2 = styled.div`
   width: 40%;
   display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 export const Container3 = styled.div`
   width: 60%;
   display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 export const SportDiv = styled.div`
@@ -139,9 +135,9 @@ export const MessageList = styled.div`
 `
 
 export const CenterContainer = styled.div`
-  /* width: 100vh;
-  text-align: center;
-  margin-left: 25px;   */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 export const StyledBtn = styled.button`
@@ -200,3 +196,14 @@ export const CardCategoriesTitle= styled.h2`
   width: 54%;
 `
 
+export const PlayerP = styled.p`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+`
+
+export const DetailP = styled.p`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+`
