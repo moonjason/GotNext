@@ -10,7 +10,7 @@ const LandingPage = () => {
     return (
         <Container>
             <InnerContainer>
-                <Title>GotNEXT<img src="./images/gotnextpic.png" style={{'max-width': '4rem'}} alt=""/></Title>
+                <Title>GotNEXT<img src="./images/gotnextpic.png" style={{'maxWidth': '4rem'}} alt=""/></Title>
                 <StyledLink to="/main">Find Parks</StyledLink>
                 <StyledLink to="/login">Login</StyledLink>
                 <StyledLink to="/register">Register</StyledLink>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
-
+import {
+    Container,
+    InnerContainer
+} from './style';
 const Register = ({ firebase, history }) => {
     const [userForm, setUserForm] = useState({
         email: '',
@@ -41,17 +44,27 @@ const Register = ({ firebase, history }) => {
             email === ''
 
     return (
-        <div>
-            <h1>Register</h1>
-            <form onSubmit={(e) => onSubmit(e)}>
-                <input type='text' name='email' value={email} placeholder="EMAIL" onChange={(e) => onChange(e)}/>
-                <input type='text' name='displayName' value={displayName} placeholder="DISPLAY NAME" onChange={(e) => onChange(e)}/>
-                <input type='text' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
-                <input type='text' name='password2' value={password2} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
-                <input type='submit' value='submit' disabled={isInvalid}/>
-                {error && <p>{error.message}</p>}
-            </form>
-        </div>
+        <Container>
+            <InnerContainer>
+                <h1>Register</h1>
+                <form onSubmit={(e) => onSubmit(e)}>
+                    <p>Email:</p>
+                    <input type='text' name='email' value={email} placeholder="EMAIL" onChange={(e) => onChange(e)}/>
+                    <br/>
+                    <p>Display Name:</p>
+                    <input type='text' name='displayName' value={displayName} placeholder="DISPLAY NAME" onChange={(e) => onChange(e)}/>
+                    <br/>
+                    <p>Password:</p>
+                    <input type='text' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
+                    <br/>
+                    <p>Confirm Password:</p>
+                    <input type='text' name='password2' value={password2} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
+                    <br/>
+                    <input type='submit' value='submit' disabled={isInvalid}/>
+                    {error && <p>{error.message}</p>}
+                </form>
+            </InnerContainer>
+        </Container>
     )
 }
 

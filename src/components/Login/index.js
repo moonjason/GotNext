@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { withFirebase } from '../Firebase';
+import {
+    Container,
+    InnerContainer
+} from './style';
 
 const Login = ({ firebase, history }) => {
     const [userForm, setUserForm] = useState({
@@ -36,15 +40,20 @@ const Login = ({ firebase, history }) => {
             email === ''
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={(e) => onSubmit(e)}>
-                <input type='text' name='email' value={email} placeholder="EMAIL" onChange={(e) => onChange(e)}/>
-                <input type='text' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
-                <input type='submit' value='submit' disabled={isInvalid}/>
-                {error && <p>{error.message}</p>}
-            </form>
-        </div>
+        <Container>
+            <InnerContainer>
+                <h1>Login</h1>
+                <form onSubmit={(e) => onSubmit(e)}>
+                    <p>Email:</p>
+                    <input type='text' name='email' value={email} placeholder="EMAIL" onChange={(e) => onChange(e)}/>
+                    <p>Password:</p>
+                    <input type='text' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
+                    <br/>
+                    <input type='submit' value='submit' disabled={isInvalid}/>
+                    {error && <p>{error.message}</p>}
+                </form>
+            </InnerContainer>
+        </Container>
     )
 }
 
