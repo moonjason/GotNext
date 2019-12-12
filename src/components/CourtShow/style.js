@@ -207,3 +207,9 @@ export const DetailP = styled.p`
   font-weight: 500;
   font-size: 1rem;
 `
+export const ModalInput = styled.input`
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+`

@@ -24,7 +24,8 @@ import {
     CardCategoriesTitle,
     CardContactTitle,
     DetailP,
-    PlayerP
+    PlayerP,
+    ModalInput
 } from './style';
 
 import { css } from "@emotion/core";
@@ -36,9 +37,7 @@ import { withFirebase } from '../Firebase';
 const override = css`
   display: block;
   margin: 2rem auto;
-`;
-
-
+`; 
 
 const CourtShow = ({ firebase, currentUser, match }) => {
     const [court, setCourt] = useState(null);
@@ -207,7 +206,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                         <Container3>
                                             <SportDiv>
                                                 <SportTitle>
-                                                    <CardTitle>Basketball</CardTitle>
+                                                    <CardTitle>Basketball Players:{' '}{checkedInPlayers.length}</CardTitle>
                                                 </SportTitle>
                                                 <CourtDiv>
                                                     <Players>
@@ -241,14 +240,16 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                 <form onSubmit={e => onSubmit(e)}>
                                     <ModalClose title="Close" onClick={() => onClick()}>Close</ModalClose>
                                     <h3>Select a sport</h3>
+                                    <br/>
                                     <select name="sport" onChange={e => onChange(e)}>
                                         <option value="Basketball">Basketball</option>
-                                        <option value="Football">Football</option>
+                                        <option value="Football" disabled>Football</option>
                                     </select>
                                     <br/>
                                     <br/>
                                     <h3>Write a message</h3>
-                                    <input type="text" name="message" value={checkInForm.message} onChange={e => onChange(e)}/>
+                                    <br/>
+                                    <ModalInput type="text" name="message" value={checkInForm.message} onChange={e => onChange(e)}/>
                                     <br/>
                                     <br/>
                                     <StyledBtn checkIn={true} type="submit">Check-In</StyledBtn>
