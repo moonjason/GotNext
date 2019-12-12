@@ -17,7 +17,6 @@ const App = ({ firebase }) => {
   useEffect(() => {
     const findAuth = () => {
       firebase.auth.onAuthStateChanged(authUser => {
-        console.log(authUser)
         if (authUser) {
           firebase.db.collection('users').doc(authUser.uid).get()
             .then(doc => {

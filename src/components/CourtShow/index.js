@@ -25,10 +25,20 @@ import {
     CardContactTitle,
     DetailP,
     PlayerP
- } from './style';
+} from './style';
 
- import { Link } from 'react-router-dom';
- import { withFirebase } from '../Firebase';
+import { css } from "@emotion/core";
+import { Link } from 'react-router-dom';
+import MoonLoader from "react-spinners/MoonLoader";
+
+import { withFirebase } from '../Firebase';
+
+const override = css`
+  display: block;
+  margin: 2rem auto;
+`;
+
+
 
 const CourtShow = ({ firebase, currentUser, match }) => {
     const [court, setCourt] = useState(null);
@@ -43,6 +53,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
         message: ''
     })
     const [checkedInPlayers, setCheckedInPlayers] = useState();
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const getCourt = async () => {
@@ -60,6 +71,9 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                 .catch(err => console.log(err))
         }
         getCourt();
+        setTimeout(() => { 
+            setLoading(false);
+        }, 1200)
     }, []);
 
     const onClick = () => {
@@ -121,7 +135,6 @@ const CourtShow = ({ firebase, currentUser, match }) => {
         <> 
             {  
                 court && 
-                // checkedInPlayers && 
                 currentUser
                     ?
                     <>
@@ -202,7 +215,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                                         <CardPlayersTitle><u>Players</u></CardPlayersTitle>
                                                         {
                                                             checkedInPlayers.map((player, i) => 
-                                                                <Link to={`/main/profile/${player.playerId}`}><PlayerP key={i}>{player.playerName}</PlayerP></Link>
+                                                                <Link to={`/main/profile/${player.playerId}`} key={i}><PlayerP>{player.playerName}</PlayerP></Link>
                                                             )
                                                         }
                                                     </Players>
@@ -244,7 +257,12 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                         </ModalWindow>
                     </>
                     : 
-                        <div>...loading</div>
+                        <MoonLoader
+                            css={override}
+                            size={69}
+                            color={"orangered"}
+                            loading={loading}
+                        />
             }
         </>
     )

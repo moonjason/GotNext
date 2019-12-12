@@ -17,7 +17,6 @@ const Main = () => {
         try {
             const courts = await fetch(`/api/v1/courts/${location}`);
             const parsedCourts = await courts.json();
-            console.log(parsedCourts);
             setCourts(parsedCourts);
         } catch(err){
             console.log(err);

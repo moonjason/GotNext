@@ -53,7 +53,7 @@ const MyCheckIn = ({ currentUser, firebase }) => {
             )
         }
     }
-    // console.log(checkedInPlayers)
+
     return (
         <>
         {  
