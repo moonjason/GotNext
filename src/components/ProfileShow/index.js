@@ -31,26 +31,28 @@ const ProfileShow = ({ currentUser, match, firebase }) => {
                 ?
                     <SetContainerMiddle>
                         <ProfileContainer>
-                            <h1>{showUser.displayName.concat("'s")} Profile</h1>
+                            <h1 style={{"fontFamily": "'Do Hyeon', sans-serif", "fontSize": "3rem"}}>{showUser.displayName.concat("'s")} Profile</h1>
+                            <br/>
                             <img style={{'maxWidth': '10vw'}} src={showUser.imgUrl} alt="profile"/>
-                            <p>Location: </p> <p>{showUser.location}</p>
-                            <p>Bio: </p> <p>{showUser.bio}</p>
-                            <p>Favorite Sports:</p>
-                            <ul>
-                                {
-                                    showUser.favoriteSports.map((sport, i) => {
-                                        return <li key={i}>{sport}</li>
-                                    })
-                                }
-                            </ul>
-                            <p>Socials:</p>
-                            <ul>
-                                {
-                                    showUser.socials.map((social, i) => {
-                                        return <li key={i}>{social}</li>
-                                    })
-                                }
-                            </ul>
+                            <br/>
+                            <h3>Location: </h3> <p>{showUser.location}</p>
+                            <br/>
+                            <h3>Bio: </h3> <p>{showUser.bio}</p>
+                            <br/>
+                            <h3>Favorite Sports:</h3>
+                            {
+                                showUser.favoriteSports.map((sport, i) => {
+                                    return <p key={i}>{sport}</p>
+                                })
+                            }
+                            <br/>
+                            <h3>Socials:</h3>
+                            {
+                                showUser.socials.map((social, i) => {
+                                    return <p key={i}>{social}</p>
+                                })
+                            }
+                            <br/>
                             {showUser.userId === match.params.id
                                 ? <Link to={'/main/profile/edit'}>Edit Profile</Link>
                                 : null

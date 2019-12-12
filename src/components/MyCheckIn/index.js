@@ -20,6 +20,7 @@ import {
 const MyCheckIn = ({ currentUser, firebase }) => {
     const [checkedInPlayers, setCheckedInPlayers] = useState(null)
     const [courtName, setCourtName] = useState(null)
+    const [isCheckedIn, setIsCheckedIn] = useState(null)
 
     useEffect(() => {
         if (currentUser !== null) {
@@ -32,6 +33,8 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                     }
                 }).catch(err => console.log(err))
                 firebase.db.collection('courts').doc(currentUser.currentCheckIn).onSnapshot(snapshot => setCheckedInPlayers([...snapshot.data().Basketball]))
+            } else {
+                setIsCheckedIn('')
             }
         }
     }, [currentUser])
@@ -54,8 +57,8 @@ const MyCheckIn = ({ currentUser, firebase }) => {
         if(currentUser.currentCheckIn !== ''){
             return (
                 <CenterContainer>
-                <h1 style={{'fontFamily': "'Do Hyeon', sans-serif", 'marginTop': '1rem'}}>Current CheckIn:</h1>
-                <h1 style={{'fontFamily': "'Do Hyeon', sans-serif"}}>{courtName}</h1>
+                <h1 style={{'fontFamily': "'Do Hyeon', sans-serif", 'marginTop': '1rem', 'fontSize': '3rem'}}>Current CheckIn:</h1>
+                <h1 style={{'fontFamily': "'Do Hyeon', sans-serif", 'fontSize': '2.5rem'}}>{courtName}</h1>
                 <StyledBtn checkIn={false} onClick={() => removePlayerFromCourt()}>Leave</StyledBtn>
                 <Container1>
                         <SportDiv>
@@ -105,11 +108,16 @@ const MyCheckIn = ({ currentUser, firebase }) => {
                     <div>
                         {renderContent()}
                     </div>
-                :   
+                :   <div>...loading</div>
+        }
+        {
+            isCheckedIn === ''
+                ?
                     <div style={{'textAlign': 'center', 'marginTop': '2rem', 'fontFamily': "'Do Hyeon', sans-serif"}}>
                         <h1>You are currently not checked in anywhere!</h1>
                         <h3>Click <Link to="/main">here</Link> to look for parks</h3>
                     </div>
+                : null
         }
         </>
     )

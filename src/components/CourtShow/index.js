@@ -133,8 +133,8 @@ const CourtShow = ({ firebase, currentUser, match }) => {
     return (    
         <> 
             {  
-                court && 
-                currentUser
+                court 
+                // && currentUser
                     ?
                     <>
                         <CourtTitle>{court.name}</CourtTitle>
@@ -168,7 +168,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                                     null
                         }
                         {
-                            currentUser.currentCheckIn === court.id
+                            currentUser && currentUser.currentCheckIn === court.id
                                 ?  <StyledBtn checkIn={false} onClick={() => removePlayerFromCourt()}>Leave</StyledBtn>
                                 :  null 
                         }
