@@ -30,8 +30,8 @@ import {
 } from './style';
 
 import { css } from "@emotion/core";
-import { Link } from 'react-router-dom';
 import MoonLoader from "react-spinners/MoonLoader";
+import { Link } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
 
