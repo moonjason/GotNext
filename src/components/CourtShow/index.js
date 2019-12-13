@@ -98,6 +98,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
             })
         })
         .catch(err => console.log(err))
+        setCheckedInPlayers(removedPlayer)
     } 
 
     const onSubmit = e => {
