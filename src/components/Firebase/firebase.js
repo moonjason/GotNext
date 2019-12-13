@@ -2,7 +2,7 @@ import app from 'firebase/app';
 import 'firebase/firebase-firestore'
 import 'firebase/storage'
 import "firebase/auth"
-
+console.log("hello", process.env)
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
