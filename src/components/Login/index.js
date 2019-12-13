@@ -3,7 +3,8 @@ import { withFirebase } from '../Firebase';
 import {
     Container,
     InnerContainer,
-    Title
+    Title,
+    StyledBtn
 } from './style';
 
 const Login = ({ firebase, history }) => {
@@ -51,7 +52,7 @@ const Login = ({ firebase, history }) => {
                     <p>Password:</p>
                     <input type='password' name='password' value={password} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
                     <br/>
-                    <input type='submit' value='submit' disabled={isInvalid}/>
+                    <StyledBtn type='submit' value='Submit' disabled={isInvalid}/>
                     {error && <p>{error.message}</p>}
                 </form>
             </InnerContainer>

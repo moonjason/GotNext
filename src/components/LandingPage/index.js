@@ -3,7 +3,9 @@ import {
     Container,
     Title,
     InnerContainer,
-    StyledLink
+    StyledLink,
+    StyledBtn,
+    Centering
  } from './style';
 
 const LandingPage = () => {
@@ -11,9 +13,9 @@ const LandingPage = () => {
         <Container>
             <InnerContainer>
                 <Title>GotNEXT<img src="./images/gotnextpic.png" style={{'maxWidth': '4rem'}} alt=""/></Title>
-                <StyledLink to="/main">Find Parks</StyledLink>
-                <StyledLink to="/login">Login</StyledLink>
-                <StyledLink to="/register">Register</StyledLink>
+                <StyledLink to="/main"><StyledBtn findParks={true}>Find Parks</StyledBtn></StyledLink>
+                <StyledLink to="/login"><StyledBtn findParks={false}>Login</StyledBtn></StyledLink>
+                <StyledLink to="/register"><StyledBtn findParks={false}><Centering>SignUp</Centering></StyledBtn></StyledLink>
             </InnerContainer>
         </Container>
     )

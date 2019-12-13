@@ -63,7 +63,6 @@ const MyCheckIn = ({ currentUser, firebase }) => {
         .catch(err => console.log(err))
     } 
 
-    
     const renderContent = () => {
         if(currentUser.currentCheckIn !== ''){
             return (
@@ -102,10 +101,11 @@ const MyCheckIn = ({ currentUser, firebase }) => {
             )
         } else {
             return(
-                <div style={{'textAlign': 'center', 'marginTop': '2rem', 'fontFamily': "'Do Hyeon', sans-serif"}}>
-                    <h1>You are currently not checked in anywhere!</h1>
-                    <h3>Click <Link to="/main">here</Link> to look for parks</h3>
-                </div>
+                <div>''</div>
+                // <div style={{'textAlign': 'center', 'marginTop': '2rem', 'fontFamily': "'Do Hyeon', sans-serif"}}>
+                //     <h1>You are currently not checked in anywhere!</h1>
+                //     <h3>Click <Link to="/main">here</Link> to look for parks</h3>
+                // </div>
             )
         }
     }

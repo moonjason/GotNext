@@ -3,7 +3,8 @@ import { withFirebase } from '../Firebase';
 import {
     Container,
     InnerContainer,
-    Title
+    Title,
+    StyledBtn
 } from './style';
 const Register = ({ firebase, history }) => {
     const [userForm, setUserForm] = useState({
@@ -62,7 +63,7 @@ const Register = ({ firebase, history }) => {
                     <p>Confirm Password:</p>
                     <input type='password' name='password2' value={password2} placeholder="PASSWORD" onChange={(e) => onChange(e)}/>
                     <br/>
-                    <input type='submit' value='submit' disabled={isInvalid}/>
+                    <StyledBtn type='submit' value='Register' disabled={isInvalid}/>
                     {error && <p>{error.message}</p>}
                 </form>
             </InnerContainer>
