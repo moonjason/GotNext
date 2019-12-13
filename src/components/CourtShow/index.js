@@ -52,7 +52,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
         sport: 'Basketball',
         message: ''
     })
-    const [checkedInPlayers, setCheckedInPlayers] = useState();
+    const [checkedInPlayers, setCheckedInPlayers] = useState(null);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -124,6 +124,7 @@ const CourtShow = ({ firebase, currentUser, match }) => {
                             currentCheckIn: court.id
                         })
                         setModal(false);
+                        setCheckedInPlayers([{ playerId: currentUser.userId, playerName: currentUser.displayName, message: checkInForm.message}]);
                     }).catch(err => console.log(err))
                 }
             }).catch((err) => {
